@@ -1,0 +1,112 @@
+Backup
+====
+author: Augustin Luna (lunaa@jimmy.harvard.edu)
+date: University of Sao Paulo, `r format(Sys.time(), '%d %B, %Y')`
+width: 960
+height: 700
+css: rpres.css
+`r if(file.exists("debug.R")) { source("debug.R"); I(grid) }`
+
+<div class="footer"><img src="del/dfci_logo.gif" height="60px" width="330px" /></div>
+
+Scree Test
+====
+`r if(file.exists("debug.R")) { source("debug.R"); I(grid) }`
+eu
+
+Hierarchical Clustering: Basic Algorithm
+====
+`r if(file.exists("debug.R")) { source("debug.R"); I(grid) }`
+* Hierarchical Clustering can be agglomerative (bottom up) or divise (top down)
+* Agglomerative: 
+ 1. The two nearest nodes are merged into a single node 
+* Divise: Similiar to agglomerative but in reverse
+
+Hierarchical Clustering and Linkage
+====
+`r if(file.exists("debug.R")) { source("debug.R"); I(grid) }`
+* eetouh
+* Options of Cluster Linkage Distances
+ * Single: Distance between clusters is defined by the distance between the two closest points. 
+ * Average: Distance 
+ * Complete: 
+* hclust() in R uses the "complete" method by default
+
+Code Only Slide
+====
+`r if(file.exists("debug.R")) { source("debug.R"); I(grid) }`
+
+```{r, eval=FALSE}
+summary(cars)
+predict(model, newdata=data.frame(Units=4))
+predict(model, newdata=data.frame(Units=4), interval = "pred")
+predict(model, newdata=data.frame(Units=4), interval = "confidence")
+```
+
+Plot Only
+====
+`r if(file.exists("debug.R")) { source("debug.R"); I(grid) }`
+
+```{r, echo=FALSE, fig.align="center", dpi=300, out.width="600px", out.height="600px"}
+plot(cars)
+```
+
+<div class="box" style="height: 10%; width: 10%; top: 30%; left: 50%">
+  <span class="filled" style="font-size: 1rem !important">Hello<span>
+</div>
+
+Output Only Slide
+====
+`r if(file.exists("debug.R")) { source("debug.R"); I(grid) }`
+
+| Right | Left | Default | Center |
+|------:|:-----|---------|:------:|
+| 12 | 12 | 12 | 12 |
+| 123 | 123 | 123 | 123 |
+| 1 | 1 | 1 | 1 |
+
+```{r, echo=FALSE}
+summary(cars)
+```
+
+Slide With Image Left
+====
+`r if(file.exists("debug.R")) { source("debug.R"); I(grid) }`
+
+![logo](dfci_logo.gif)
+
+***
+
+The equation is $\frac{1}{n} \sum_{i=i}^{n} x_{i}$
+
+
+Two-Column Slide
+====
+left: 70%
+`r if(file.exists("debug.R")) { source("debug.R"); I(grid) }`
+
+First Column 
+
+For more details on autoring R presentations please visit authoring R presentations please visit
+
+```{r, echo=FALSE, fig.width=6, fig.height=2, fig.align="center", dpi=150, out.width="600px"}
+plot(cars)
+```
+
+* T1
+* T2 
+
+***
+
+Second column
+
+For more details on authoring R presentations please visit authoring R presentations please visit
+
+Workflow
+====
+class: center-img
+`r if(file.exists("debug.R")) { source("debug.R"); I(grid) }`
+
+Package repositories ensure functionality, documentation, and interoperability
+
+ <img src="img/del.png" height="400px" width="300px" />

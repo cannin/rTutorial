@@ -1,0 +1,100 @@
+Introduction to X
+========================================================
+author: Augustin Luna
+date: `r format(Sys.time(), '%d %B, %Y')`
+autosize: true
+width: 960
+height: 700
+css: example.css
+
+<div class="footer"><img src="dfci_logo.gif" height="60px" width="330px" /></div>
+
+First Slide2
+========================================================
+For more details on authoring R presentations please visit <https://support.rstudio.com/hc/en-us/articles/200486468>.
+
+* transition: rotate
+* font-import: http://fonts.googleapis.com/css?family=Cinzel
+* font-family: 'Cinzel'
+* incremental: true
+* css: custom.css
+
+<small>This sentence will appear smaller.</small>
+
+- Bullet 1
+- Bullet 2
+- Bullet 3
+
+New Section
+====================================
+type: section
+
+Prompt Slide
+====================================
+type: prompt
+
+Sub-section
+====================================
+type: sub-section
+
+Alert
+====================================
+type: alert
+
+Slide With Code
+========================================================
+
+```{r}
+summary(cars)
+```
+
+Slide With Plot
+========================================================
+
+```{r, echo=FALSE, fig.align="center", dpi=300, out.width="600px", out.height="600px"}
+plot(cars)
+```
+
+Code Only Slide
+====================================
+```{r, eval=FALSE}
+summary(cars)
+predict(model, newdata=data.frame(Units=4))
+predict(model, newdata=data.frame(Units=4), interval = "pred")
+predict(model, newdata=data.frame(Units=4), interval = "confidence")
+```
+
+Output Only Slide
+====================================
+| Right | Left | Default | Center |
+|------:|:-----|---------|:------:|
+| 12 | 12 | 12 | 12 |
+| 123 | 123 | 123 | 123 |
+| 1 | 1 | 1 | 1 |
+
+```{r, echo=FALSE}
+summary(cars)
+```
+
+Slide With Image Left
+====================================
+![logo](dfci_logo.gif)
+***
+The equation is $\frac{1}{n} \sum_{i=i}^{n} x_{i}$
+
+
+Two-Column Slide
+====================================
+left: 70%
+
+First Column 
+
+For more details on autoring R presentations please visit authoring R presentations please visit
+
+```{r, echo=FALSE, fig.width=6, fig.height=6, fig.align="center", dpi=150, out.width="800px", height="600px"}
+plot(cars)
+```
+***
+Second column
+
+For more details on authoring R presentations please visit authoring R presentations please visit

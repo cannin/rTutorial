@@ -1,0 +1,78 @@
+---
+title: "Machine Learning Introduction"
+output: 
+  html_document:
+    toc: true
+---
+
+```{r setup, echo=FALSE, warning=FALSE, message=FALSE}
+require("knitr")
+opts_chunk$set(fig.align="center", fig.width=6, fig.height=6, dpi=150)
+
+```
+
+# Regression, Clustering, Dimension Reduction
+
+## Regression
+### Linear regression 
+
+From: http://www.r-tutor.com/elementary-statistics/simple-linear-regression
+
+```{r}
+# Load built-in iris dataset 
+data(iris)
+
+# Fit a linear regression: iris_lm
+iris_lm <- lm(Petal.Width ~ Petal.Length, data=iris)
+
+# Build a scatterplot
+plot(iris$Petal.Length, iris$Petal.Width, pch=21, bg=c("red","green3","blue")[unclass(iris$Species)])
+
+# Add straight line to scatterplot
+iris_coef <- coef(iris_lm)
+abline(iris_coef)
+```
+
+## Clustering
+### K-Nearest Neighbors 
+
+From: http://blog.datacamp.com/machine-learning-in-r/
+
+```{r}
+newiris <- iris
+newiris$Species <- NULL
+```
+
+Apply kmeans to iris, and store the clustering result in kc. The cluster number is set to 3.
+
+```{r}
+kc <- kmeans(newiris, 3)
+```
+
+Compare the Species label with the clustering result
+
+```{r}
+table(iris$Species, kc$cluster)
+```            
+
+Plot the clusters and their centres. Note that there are four dimensions in the data and that only the first two dimensions are used to draw the plot below. Some black points close to the green centre (asterisk) are actually closer to the black centre in the four dimensional space.
+
+```{r}
+plot(iris[c("Sepal.Length", "Sepal.Width")], bg=c("red","green3","blue")[kc$cluster], pch=21)
+points(kc$centers[,c("Sepal.Length", "Sepal.Width")], col=c("red","green3","blue"), pch=8, cex=2)
+```
+
+## Dimension Reduction
+### Principal Component Analysis
+
+From: http://www.r-bloggers.com/computing-and-visualizing-pca-in-r/
+
+```{r}
+iris_data <- iris[, 1:4]
+iris_species <- iris[, 5]
+ 
+pcaResult <- prcomp(iris_data) 
+
+# Plot the first 2 principal components
+plot(pcaResult$x, pch=21, bg=c("red","green3","blue")[unclass(iris$Species)]) 
+```
