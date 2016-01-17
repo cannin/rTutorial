@@ -1,4 +1,4 @@
-Introduction to Machine Learning
+Introduction to Statistical Methods
 ===
 author: Augustin Luna
 date: `r format(Sys.time(), '%d %B, %Y')`
@@ -19,20 +19,27 @@ css: rpres.css
 
 Topics to be Covered
 ===
-* Correlation Test
+* Correlations
 * Enrichment Analyses
 * Multiple Testing Correction
 * Regression
 * Clustering
 * Dimensionality Reduction
 
-What is Machine Learning?
+Introduction
 ===
-* Machine learning has the general goal of X 
- * Related to the areas of informatics, data mining, data science, machine learning, and statistics 
-* Concepts covered here are important to the areas of above
+* Data analyses are the product of many tasks
+* Data preparation
+ * Extracting structured data from unstructured data sources 
+ * Merging data sources 
+ * Ensuring consistency of datasets 
+* Dataset interpretation 
+ * Create visualizations to present and communicate findings
+* Statistics 
+ * Build predictive mathematical models 
+* Methods are common in the areas of informatics, data mining, data science, machine learning, and statistics 
 
-Machine Learning Techniques
+Statistical Methods Flowchart
 ===
 class: center-img, smaller
 
@@ -43,11 +50,11 @@ class: center-img, smaller
 
 Methods to be Covered
 ===
-* Basic techniques will be covered to build confidence with R and the general concepts
+* Basic method will be covered to build confidence with R and the general concepts
  * Dimensionality Reduction: Principal Component Analysis (PCA)
  * Regression: Linear regression
  * Clustering: Hierarchical and K-means clustering
- * Classification will **NOT** be covered. 
+ * Classification will not be covered
 
 Correlating Two Vectors
 ===
@@ -133,7 +140,7 @@ where
 * N: number of studied genes, 
 * n: total number of genes identified by a previous analysis
 * K: total number of genes in a pathway $pathway_j$
-* k: number genes previously identified genes in pathway $pathway_j$
+* k: number genes previously identified genes in $pathway_j$
 * $\binom{n}{k}$: choose $k$ elements from a set with $n$ elements disregarding order
 
 The p-value of this test indicates the probability that a random selection of genes of the same size as the input gene set from a population would produce the same number of observed annotations (e.g. for a specific GO term or pathway) or more in the gene set 
@@ -276,7 +283,7 @@ Goal: We want to find a set of regression coefficients $\beta$ for $x = (x_1, \l
 $$\hat{y} = \hat{\beta_0} + \hat{\beta_1}x_1 + \hat{\beta_2}x_2 + \ldots$$
 
 * $\hat{y}$ is the predicted value 
-* $\hat{\beta}$ are the predicted regression coefficients (as opposed to the true coefficients)
+* $\hat{\beta}$ are the estimated regression coefficients (as opposed to the true coefficients)
 
 Example Regression
 ===
@@ -336,8 +343,8 @@ class: smaller
  * This is due to the degrees of freedom in the system. 
  * There are $n$ observations and $p+1$ parameters (one regression coefficient for each predictor plus the intercept) leaving $n-p-1$ degrees of freedom.
  * Increasing the sample size provides more information about the population test. 
- * Increasing the number of predictors in the resulting model lowers the degrees of freedom available to estimate the variability of the predictors. 
- 
+ * Increasing the number of predictors in the resulting model lowers the degrees of freedom available to estimate the variability of the predictors; this increases the variance of the regression coefficient estimates and reduces confidence in the model.
+
 LASSO, Ridge, and Elastic Net Regularized Regression
 ===
 class: smaller
@@ -476,19 +483,27 @@ Differences between Hierarchical and K-Means Clustering
 Dimensionality Reduction
 ===
 * Goal: Seeks to reveal correlations that exist in data with many predictors
- * This reduces the dimensionality of the data by decreasing the redundancy of correlated variables 
+ * This can be used to reduce the dimensionality of the data by decreasing the redundancy of correlated variables 
 
 * Results: 
  * Loadings: weight for the original variables to be multiplied by to get the component scores 
  * Component Scores: Transformed variable values for a given point
-* `prcomp` and `princomp` can do PCA in R; `prcomp` is the [[FIX]] advised function
+* `prcomp` and `princomp` can do PCA in R; `prcomp` is the advised function
 
 What is Principal Component Analysis (PCA)
 ===
 class: smaller 
 
-* PCA seeks to take a multi-dimensional (e.g. one with many predictors (features)) datasets 
-* Seeks to find a projection of the data that best separates data points 
+* Goal: PCA seeks to simplify a multi-dimensional (e.g. one with 3+ predictors (features)) dataset
+* Uses 
+ * Feature (predictor) extraction 
+ * Can help reveal clusters 
+ * May validate clustering results 
+ 
+* Example: We have a dataset with 20 dimensions and it may be interesting to plot the data in two dimensions
+
+What are Principal Components?
+===
 * Each "principal component" (PC) is an axis that captures the most variance
  * Variance is a measure of the spread of data points; standard deviation is the square root of variance 
  * Each PC is a combination of the original variables scaled by a coefficient
@@ -499,19 +514,34 @@ PCA Example
 ===
 class: smaller-75
 
+* Using scale=TRUE is advisable
+* `prcomp` first transforms the data by centering and scaling 
+ * Centering is done by subtracting the column means
+ * Scaling is done by dividing the (centered) columns of $x$ by their standard deviations
+ 
 ```{r}
 iris_data <- iris[, 1:4]
 
-# Variables are scaled to have a variance of 1; this is advisable
 pcaResult <- prcomp(iris_data, scale=TRUE)
 summary(pcaResult)
-``` 
-
-TMP
-===
-```{r}
-plot(iris_data*t(pcaResult$rotation))
 ```
+
+Recovering the Original Data
+===
+class: smaller-50
+
+```{r}
+pcaResult$rotation
+```
+
+```{r}
+# Original 
+iris_data[1,]
+
+# Recovered
+tmp <- t(t(pcaResult$x %*% t(pcaResult$rotation)) * pcaResult$scale + pcaResult$center)
+tmp[1,]
+``` 
 
 PCA Example Plots
 ===
@@ -528,12 +558,28 @@ plot(pcaResult, type="line", cex.lab=1.5, cex.main=1.5, main="")
 abline(h=1, lty=3, col="red") 
 ```
 
-Variable Combinations Yielding PCs
+Nature of PCs Using biplot
 ===
-class: smaller-75
+class: smaller-50
+
+* Close together points are similar 
+* Close together vectors are similar
+
+```{r, echo=FALSE}
+par(mai=c(0.8,0.5,0.5,0))
+```
+```{r, fig.align="center", fig.height=4, fig.width=4, dpi=150, out.height="500px"}
+
+biplot(pcaResult, scale=0, cex=.7)
+``` 
+
+Correlations between Vectors
+===
+class: smaller 
 
 ```{r}
-print(pcaResult)
+cor(iris[,"Petal.Length"], iris[,"Petal.Width"])
+cor(iris[,"Petal.Length"], iris[,"Sepal.Width"])
 ```
 
 How Many Principal Components Should be Kept? 
@@ -544,7 +590,7 @@ How Many Principal Components Should be Kept?
 * Scree Test
  * Find the place where the smooth decrease in the variances levels off
  * Multiple users may interpret the data different, unless trained the same
- 
+
 Getting Help
 ===
 * Cross-Validated Stats Exchange
@@ -554,15 +600,3 @@ Getting Help
  * https://www.biostars.org
 
 ===
-
-Nature of PCs Using biplot
-===
-class: smaller-75
-
-* PC1: Petal.Length and Petal.Width
-
-```{r, fig.align="center", fig.height=4, fig.width=4, dpi=150, out.height="500px"}
-
-par(mai=c(0.8,0.5,0.5,0))
-biplot(pcaResult, scale=0, cex=.7)
-``` 
