@@ -1,3 +1,5 @@
+`r if(file.exists("head.R")) { source("head.R"); I(head) }`
+
 Introduction to CBioPortal
 ===
 author: Augustin Luna
@@ -6,7 +8,7 @@ width: 960
 height: 700
 transition: linear
 css: rpres.css
-`r if(file.exists("debug.R")) { source("debug.R"); I(grid) }`
+
 <!-- NOTE: Styling and external images may be missing --> 
 
 <p>Research Fellow
@@ -72,6 +74,14 @@ CBioPortal Data Notes
 * Example notes
   * Clinical data, includes: overall and disease-free survival, gender, age, stage and tumor grade, when available.
   * mRNA and microRNA data is z-scored (i.e. the number of standard deviations away from the mean of expression
+   
+What is cgdsr? 
+===
+class: smaller 
+
+* Website and Tutorial (Vignette):
+ * https://cran.r-project.org/web/packages/cgdsr/index.html
+* Provides programmatic access to CBioPortal data
    
 Getting Help
 ===

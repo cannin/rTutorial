@@ -1,0 +1,65 @@
+`r if(file.exists("head.R")) { source("head.R"); I(head) }`
+
+Summary
+===
+author: Augustin Luna
+date: `r format(Sys.time(), '%d %B, %Y')`
+width: 960
+height: 700
+transition: linear
+css: rpres.css
+
+<!-- NOTE: Styling and external images may be missing --> 
+
+<p>Research Fellow
+  <br/>
+  Department of Biostatistics and Computational Biology
+  <br/>
+  Dana-Farber Cancer Institute
+</p>
+<div class="footer" style="display:none;"><img src="img/dfci_logo.gif" height="60px" width="330px" /></div>
+
+Topics Covered
+===
+* R: Language Basics, Plotting, Getting Help
+* Machine Learning Fundamentals
+ * Dimensionality Reduction
+ * Regression
+ * Clustering
+* Accessing Data sets: CellMiner (cell lines/drugs), CBioPortal (patient samples), Pathway Commons (pathways)
+* Developing Web Applications 
+
+Acknowledgements
+===
+class: smaller-75
+
+* Dana-Farber Cancer Institute
+ * Chris Sander
+
+* MSKCC
+ * Eric Minwei 
+ * Jianjiong Gao
+ * Nikolaus Schultz
+
+* Bilkent University
+ * Ugur Dogrusoz 
+ 
+* Oregon Health & Science University
+ * Ozgun Babur
+ * Emek Demir
+
+*** 
+
+* NCI DTB
+ * Vinodh Rajapakse
+ * William (Bill) Reinhold 
+ * Yves Pommier 
+
+* Universidade Federal de Mato Grosso do Sul
+ * Fabricio Sousa 
+ 
+* Universidade de São Paulo
+ * Jose Belizario
+
+* And many more ... 
+

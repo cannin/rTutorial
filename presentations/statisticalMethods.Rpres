@@ -1,3 +1,5 @@
+`r if(file.exists("head.R")) { source("head.R"); I(head) }`
+
 Introduction to Statistical Methods
 ===
 author: Augustin Luna
@@ -407,19 +409,13 @@ class: smaller-50
 # Retain only the numeric data in the iris dataset
 iris_data <- iris[, 1:4]
 
-kc <- kmeans(iris_data, 3)
+# nstart: try multiple initial configurations and report the best one
+kc <- kmeans(iris_data, 3, nstart=25)
 
 par(mai=c(1,1,0,0))
 plot(iris[c("Sepal.Length", "Sepal.Width")], bg=c("red","green3","blue")[kc$cluster], pch=21)
 points(kc$centers[,c("Sepal.Length", "Sepal.Width")], col=c("red","green3","blue"), pch=8, cex=2)
 ```
-
-Compare the Species with Clustering
-===
-
-```{r}
-table(iris$Species, kc$cluster)
-```  
 
 Determine K-Means Cluster Quality 
 ===
@@ -469,6 +465,13 @@ plot(1:kMax, avgSi, type="b", pch=19, xlab="Number of Clusters (k)")
 abline(v=which.max(avgSi), lty=2)
 ```
 
+Compare Known Classes with Clusters
+===
+
+```{r}
+table(iris$Species, kc$cluster)
+```  
+
 Differences between Hierarchical and K-Means Clustering
 ===
 * Clusters 
@@ -484,23 +487,23 @@ Dimensionality Reduction
 ===
 * Goal: Seeks to reveal correlations that exist in data with many predictors
  * This can be used to reduce the dimensionality of the data by decreasing the redundancy of correlated variables 
-
-* Results: 
- * Loadings: weight for the original variables to be multiplied by to get the component scores 
- * Component Scores: Transformed variable values for a given point
-* `prcomp` and `princomp` can do PCA in R; `prcomp` is the advised function
+* Principal Component Analysis is a method for dimension reduction 
 
 What is Principal Component Analysis (PCA)
 ===
-class: smaller 
+class: smaller-75
 
 * Goal: PCA seeks to simplify a multi-dimensional (e.g. one with 3+ predictors (features)) dataset
-* Uses 
- * Feature (predictor) extraction 
- * Can help reveal clusters 
- * May validate clustering results 
+ * Used for feature extraction 
+ * May reveal clusters and help validate clustering results 
  
 * Example: We have a dataset with 20 dimensions and it may be interesting to plot the data in two dimensions
+
+* Results: 
+ * Loadings: Weights for the original values to get the component scores 
+ * Component Scores: Transformed values for a given point
+
+* `prcomp` and `princomp` can do PCA in R; `prcomp` is the advised function
 
 What are Principal Components?
 ===
@@ -526,23 +529,6 @@ pcaResult <- prcomp(iris_data, scale=TRUE)
 summary(pcaResult)
 ```
 
-Recovering the Original Data
-===
-class: smaller-50
-
-```{r}
-pcaResult$rotation
-```
-
-```{r}
-# Original 
-iris_data[1,]
-
-# Recovered
-tmp <- t(t(pcaResult$x %*% t(pcaResult$rotation)) * pcaResult$scale + pcaResult$center)
-tmp[1,]
-``` 
-
 PCA Example Plots
 ===
 class: smaller-75
@@ -557,6 +543,25 @@ plot(pcaResult$x, pch=21, bg=c("red","green3","blue")[unclass(iris$Species)])
 plot(pcaResult, type="line", cex.lab=1.5, cex.main=1.5, main="")
 abline(h=1, lty=3, col="red") 
 ```
+
+Recovering the Original Data
+===
+class: smaller-50
+
+```{r}
+# Weights (known as loadings)
+pcaResult$rotation
+
+# Original 
+iris_data[1,]
+
+# Transformed 
+pcaResult$x[1,]
+
+# Recovered
+tmp <- t(t(pcaResult$x %*% t(pcaResult$rotation)) * pcaResult$scale + pcaResult$center)
+tmp[1,]
+``` 
 
 Visualizing PCA Results with Biplots
 ===
@@ -578,12 +583,12 @@ Correlations between Vectors
 ===
 class: smaller-75
 
-## Feature to Principal Commponent Correlations
+## Feature to Principal Component Correlations
 ```{r}
 cor(iris_data, pcaResult$x)
 ```
 
-## Feature to Principal Commponent Contributions
+## Feature to Principal Component Contributions
 ```{r}
 tmp <- abs(pcaResult$rotation)
 sweep(tmp, 2, colSums(tmp), "/")
@@ -605,5 +610,3 @@ Getting Help
  * http://stats.stackexchange.com/
 * Biostars
  * https://www.biostars.org
-
-===

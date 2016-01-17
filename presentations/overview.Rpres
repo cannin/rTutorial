@@ -1,3 +1,5 @@
+`r if(file.exists("head.R")) { source("head.R"); I(head) }`
+
 Overview
 ===
 author: Augustin Luna
@@ -6,7 +8,7 @@ width: 960
 height: 700
 transition: linear
 css: rpres.css
-`r if(file.exists("debug.R")) { source("debug.R"); I(grid) }`
+
 <!-- NOTE: Styling and external images may be missing --> 
 
 <p>Research Fellow
@@ -21,7 +23,7 @@ Topics to be Covered
 ===
 * R: Language Basics, Plotting, Getting Help
 * Using the RStudio Editor
-* Machine Learning Fundamentals
+* Introduction to Statistical Methods 
  * Dimensionality Reduction
  * Regression
  * Clustering

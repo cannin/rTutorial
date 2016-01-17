@@ -1,3 +1,5 @@
+# `r if(file.exists("debug.R")) { source("debug.R"); I(grid) }`
+
 debug <- TRUE 
 
 if(debug) {

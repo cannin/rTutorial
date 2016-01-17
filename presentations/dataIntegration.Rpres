@@ -1,0 +1,28 @@
+`r if(file.exists("head.R")) { source("head.R"); I(head) }`
+
+Data Integration with cgdsr, rcellminer, and paxtoolsr
+===
+author: Augustin Luna
+date: `r format(Sys.time(), '%d %B, %Y')`
+width: 960
+height: 700
+transition: linear
+css: rpres.css
+
+<!-- NOTE: Styling and external images may be missing --> 
+
+<p>Research Fellow
+  <br/>
+  Department of Biostatistics and Computational Biology
+  <br/>
+  Dana-Farber Cancer Institute
+</p>
+<div class="footer" style="display:none;"><img src="img/dfci_logo.gif" height="60px" width="330px" /></div>
+
+Topics to be Covered
+===
+class: smaller 
+
+* Connecting CellMiner and TCGA data
+* Connecting CellMiner data to Pathway Commons
+   
