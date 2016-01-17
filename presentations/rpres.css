@@ -39,13 +39,17 @@
 
 img {
   border: 1px solid !important;
-  border-color: rgba(255,0,255, 1) !important;
-  z-index: 100;
+  border-color: rgba(255,0,255, 0) !important;
+  z-index: 10;
 }
 
 .center-img img {
   display: block;
   margin: auto !important;
+}
+
+.top-img {
+  z-index: 100;
 }
 
 table {
@@ -78,6 +82,14 @@ table {
 
 .smaller {
   font-size: smaller !important;
+}
+
+.smaller-75 {
+  font-size: 75% !important;
+}
+
+.smaller-50 {
+  font-size: 50% !important;
 }
 
 /* MAIN */

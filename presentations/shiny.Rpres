@@ -1,0 +1,293 @@
+Introduction to Shiny
+===
+author: Augustin Luna
+date: `r format(Sys.time(), '%d %B, %Y')`
+width: 960
+height: 700
+transition: linear
+css: rpres.css
+
+<!-- NOTE: Styling and external images may be missing --> 
+
+<p>Research Fellow
+  <br/>
+  Department of Biostatistics and Computational Biology
+  <br/>
+  Dana-Farber Cancer Institute
+</p>
+<div class="footer" style="display:none;"><img src="img/dfci_logo.gif" height="60px" width="330px" /></div>
+
+What is Shiny?
+===
+* Provides an easy and quick way of presenting data and engaging with users
+ * Share your analyses with users that do not know R
+* An R-based web application framework for interactive R scripts and visualizations
+* Developed by RStudio
+* Web applications can be run locally, on a web server, or hosted by RStudio at http://shinyapps.io
+* Can handle complex situations
+ * File uploads for data processing
+ * Interactive plots
+
+Shiny App Structure
+===
+* Two components
+ * User interface script: controls layout and appearance
+ * Server script: contains code to run any analyses visualized in the app
+* Conversion of R code to an HTML (website) is handled by the `shiny` R package
+ * Knowledge of web development is not necessary, but custom Javascript, HTML and CSS can be included
+
+Hello World! Shiny App Screenshot
+===
+class: center-img
+ 
+<img src="img/shiny_helloWorld.png" height="600px" />
+ 
+Hello World! Shiny App Code
+===
+class: smaller
+left: 40%
+
+* `fluidPage`: Expand components to fill page
+* `titlePanel`: Adds page title
+* `sidebarLayout`: Sets page layout
+* `sidebarPanel`: Sidebar contents
+* `mainPanel`: Main page contents
+
+*** 
+
+```{r eval=FALSE}
+# ui.R
+shinyUI(fluidPage(
+    titlePanel("Hello World!"),
+    sidebarLayout(
+      sidebarPanel("Side Bar"),
+      mainPanel("Main Panel")
+    )
+))
+
+# server.R
+shinyServer(function(input, output) {
+  # NOTHING 
+})
+```
+
+Run Shiny App in RStudio
+===
+class: center-img
+
+* You can also call `runApp()` in the folder with app files
+
+<div class="box" style="height: 2%; width: 5%; top: 33.5%; left: 45%"></div>
+<img src="img/shiny_runShiny.png" height="575px" />
+
+
+Shiny App Gallery
+===
+class: center-img
+
+* RStudio provides a large gallery of Shiny apps with code
+ * http://shiny.rstudio.com/gallery/ 
+
+<img src="img/shiny_gallery.png" height="500px" />
+
+rcellminer Shiny Apps
+===
+class: center-img
+
+* Complex Shiny apps are provided with `rcellminer`
+* Features with interactive plots, progress bars, tabs, etc. 
+ * http://sanderlab.org/shinyComparePlots/
+ 
+<img src="img/shiny_rcellminerDemo.png" height="450px" /> 
+
+Shiny App Inputs (Widgets)
+===
+class: center-img
+
+* Most inputs found on websites are available in Shiny
+ * http://shiny.rstudio.com/gallery/widget-gallery.html
+
+<img src="img/shiny_widgets.png" height="500px" />
+
+Shiny Widgets to be Covered
+===
+* Inputs 
+ * `textInput`: Provide a text field 
+* Outputs
+ * `verbatimTextOutput`: Print R messages "as is"
+ * `plotOutput`: Display an R plot image
+* `includeMarkdown`: Displays Markdown-formatted text files 
+
+Displaying Formatted Text using Markdown
+===
+* Text formatting organizes content with headers, bullets, etc.
+* Markdown is a text-to-HTML conversion tool that allows you to write using an easy-to-read, easy-to-write plain text format
+ * https://www.rstudio.com/resources/cheatsheets/
+
+Shiny Text Input
+===
+class: smaller
+
+* `textInput` example that changes text as the user types; a reactive input
+* `textInput("text", ...)` label matches `input$text`
+* `verbatimTextOutput("value")` label matches `output$value`
+
+```{r, eval=FALSE}
+# ui.R
+shinyUI(fluidPage(
+    titlePanel("Hello World!"),
+    sidebarLayout(
+      sidebarPanel(textInput("text", label="Input", value="Type here...")),
+      mainPanel(verbatimTextOutput("value"))
+    )
+))
+
+# server.R
+shinyServer(function(input, output) {
+  output$value <- renderPrint({ input$text })
+})
+```
+
+Text Input Shiny App Example
+===
+class: center-img
+ 
+<img src="img/shiny_textInput.png" height="600px" />
+
+Shiny Plot Output
+===
+class: smaller
+
+* Any R code that produces a plot can be included in `renderPlot`
+
+```{r, eval=FALSE}
+# ui.R
+shinyUI(fluidPage(
+    titlePanel("Hello World!"),
+    sidebarLayout(
+      sidebarPanel(textInput("num", label="Number", value="10")),
+      mainPanel(plotOutput("plot"))
+    )
+))
+
+# server.R
+shinyServer(function(input, output) {
+  output$plot <- renderPlot({
+      a <- runif(input$num)
+      b <- runif(input$num)
+      plot(a, b)
+    })
+})
+```
+
+Plot Output Shiny App Example
+===
+class: center-img
+
+<img src="img/shiny_plotOutput.png" height="600px" />
+
+CellMiner Formulas Shiny App
+===
+* Drug activity can result from the interaction of many genes 
+* Source code
+ * https://bitbucket.org/cbio_mskcc/rcellminer/src/
+ * Located under rcellminer/inst/shinyTutorial/
+ * Files: www/help.md, server.R, ui.R
+* Notes
+ * Code in `reactive()` runs when an input changes
+ 
+ 
+Code Location in server.R 
+===
+
+* Location of R code in server.R affects how frequently it is run
+
+```{r, eval=FALSE}
+# server.R
+
+# Run once when the app is loaded
+
+shinyServer(function(input, output) {
+  
+  # Run once when a new user visits
+  
+  output$plot <- renderPlot({
+    
+    # Run every time a user makes input changes
+    
+  })	
+})
+```
+
+CellMiner Formulas Shiny App
+===
+class: center-img
+
+<img src="img/shiny_formulas.png" height="600px" />
+
+Package Recommendations for Advanced Functionality
+===
+class: smaller
+
+* `rcharts`: display of interactive plots using existing Javascript libraries
+ * Highcharts is included in `rcharts` and is highly customizable
+ * http://ramnathv.github.io/rCharts/
+* `DT`: interactive tables using the DataTables library
+ * https://rstudio.github.io/DT/
+* `htmlwidgets`: allows any Javascript library to be used into Shiny apps
+* `rcytoscape.js`: built with `htmlwidgets` is for network views
+ * https://github.com/cytoscape/r-cytoscape.js
+ 
+r-cytoscape.js 
+===
+class: center-img
+
+* Provides interactive network views that communicate user actions back to R
+
+<img src="img/shiny_rcytoscapejs.png" height="500px" />
+
+Hosting Apps on shinyapps.io
+===
+class: center-img
+* shinyapps.io by RStudio
+* Easy to update Shiny apps from RStudio 
+* Free tier can be used quickly with moderate use
+* Authentication is not free
+
+<img src="img/shiny_shinyapps.png" height="300px" />
+
+Hosting Apps on using Shiny Server
+===
+* Shiny Server allows self-hosting apps, simple to set up
+ * https://www.rstudio.com/products/shiny/shiny-server/
+* Authentication is not free
+ * Alternative, set authentication at the web server level
+ * https://wiki.apache.org/httpd/PasswordBasicAuth
+
+Embedding Shiny Apps in R Packages
+===
+* Shiny apps can be embedded as part of R packages
+* Benefits
+ * Longevity: Even if projects websites are taken down, users will continue to have access
+ * Privacy: Users may be reluctant to upload confidential data
+ * Speed: Users locally may have access to more powerful machines for processing data
+* `rcellminer` includes examples of embedding Shiny apps in R packages 
+
+Getting Help
+===
+* Shiny tutorials
+ * http://shiny.rstudio.com
+* Cheatsheet (summary of main functions) 
+ * https://www.rstudio.com/resources/cheatsheets/
+* Stack Overflow
+ * http://stackoverflow.com
+ 
+Summary
+===
+* The Shiny tutorials are excellent 
+* Almost any website features can be included
+* Provides a easy and quick way of presenting data and engaging with users
+* Excellent for apps connected with publications 
+* Complex functionality can be tricky to debug
+
+

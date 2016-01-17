@@ -1,7 +1,7 @@
 Overview
 ===
 author: Augustin Luna
-date: 09 January, 2016
+date: 15 January, 2016
 width: 960
 height: 700
 transition: linear
@@ -42,10 +42,10 @@ Topics to be Covered
 * R: Language Basics, Plotting, Getting Help
 * Using the RStudio Editor
 * Machine Learning Fundamentals
- * Dimension Reduction
+ * Dimensionality Reduction
  * Regression
  * Clustering
-* Accessing Datasets: CellMiner (cell lines/drugs), CBioPortal (patient samples), Pathway Commons (pathways)
+* Accessing Data sets: CellMiner (cell lines/drugs), CBioPortal (patient samples), Pathway Commons (pathways)
 * Developing Web Applications 
 
 What is R?
@@ -63,11 +63,16 @@ Why is R Popular?
  * Script-driven rather than menu-driven helps reproducibility
 * Flexible and powerful plotting support
 * Excellent package management system 
- * Large and growing collection of statistical analysis methods
- * Simple package installation; dependency management
- * R scripts usually portable to other platforms 
- * Package repositories ensure functionality, documentation, and interoperability
- * Vignettes (tutorials) provided as runnable analyses 
+
+R Package Management System
+===
+* Large and growing collection of statistical analysis methods
+* Simple package installation; dependency management
+* R scripts usually portable to other platforms 
+* Package repositories ensure functionality, documentation, and interoperability
+* Vignettes (tutorials) provided as runnable analyses 
+* Large diversity of packages for data analysts
+ * This presentation was produced with R packages
 
 Extending R and Package Repositories
 ===
@@ -79,49 +84,35 @@ Extending R and Package Repositories
  * 50+ packages dedicated to pathway analysis
 * Devtools 
  * R package that allows package installation from code repositories
- 
+
 RStudio
 ===
-
 * https://www.rstudio.com/
 * Available for Windows, OSX, and Linux
 * Simplifies common tasks: plotting, package installation, accessing files, 
 viewing variables, etc.
+* Provides code-completion so users do not have to remember whole lists functions and tons parameters
 
 Installing R and RStudio
 ===
-
 * Install R
  * https://cran.rstudio.com/
 * Install RStudio
  * https://www.rstudio.com/products/rstudio/download/
 * RStudio does not come with R and R must be installed first
 
+YouTube Video Guides to Install R and RStudio
+===
+* The following videos show how to install R and RStudio from scratch
+ * Include instructions for many common dependencies needed for pathway analysis package `paxtoolsr`
+ * OS X: https://youtu.be/lUwP6KncMOo
+ * Windows: https://youtu.be/LcnCngOlbJc
+ * Linux: https://youtu.be/JlCy9IwZrOk
+
 RStudio Overview
 ===
 class: center-img
 
-<div class="guide horz" style="height: 0%; width: 100%; top: 10%; left: 0%"></div>
-<div class="guide horz" style="height: 0%; width: 100%; top: 20%; left: 0%"></div>
-<div class="guide horz" style="height: 0%; width: 100%; top: 30%; left: 0%"></div>
-<div class="guide horz" style="height: 0%; width: 100%; top: 40%; left: 0%"></div>
-<div class="middle-guide horz" style="height: 0%; width: 100%; top: 50%; left: 0%"></div>
-<div class="guide horz" style="height: 0%; width: 100%; top: 60%; left: 0%"></div>
-<div class="guide horz" style="height: 0%; width: 100%; top: 70%; left: 0%"></div>
-<div class="guide horz" style="height: 0%; width: 100%; top: 80%; left: 0%"></div>
-<div class="guide horz" style="height: 0%; width: 100%; top: 90%; left: 0%"></div>
-
-<div class="guide vert" style="height: 100%; width: 0%; top: 0%; left: 10%"></div>
-<div class="guide vert" style="height: 100%; width: 0%; top: 0%; left: 20%"></div>
-<div class="guide vert" style="height: 100%; width: 0%; top: 0%; left: 30%"></div>
-<div class="guide vert" style="height: 100%; width: 0%; top: 0%; left: 40%"></div>
-<div class="middle-guide vert" style="height: 100%; width: 0%; top: 0%; left: 50%"></div>
-<div class="guide vert" style="height: 100%; width: 0%; top: 0%; left: 60%"></div>
-<div class="guide vert" style="height: 100%; width: 0%; top: 0%; left: 70%"></div>
-<div class="guide vert" style="height: 100%; width: 0%; top: 0%; left: 80%"></div>
-<div class="guide vert" style="height: 100%; width: 0%; top: 0%; left: 90%"></div>
-
- 
 <img src="img/rstudio.png" height="600px" />
 
 <div class="box" style="height: 10%; width: 20%; top: 30%; left: 20%">
@@ -144,27 +135,6 @@ Table View of Variables
 ===
 class: center-img
 
-<div class="guide horz" style="height: 0%; width: 100%; top: 10%; left: 0%"></div>
-<div class="guide horz" style="height: 0%; width: 100%; top: 20%; left: 0%"></div>
-<div class="guide horz" style="height: 0%; width: 100%; top: 30%; left: 0%"></div>
-<div class="guide horz" style="height: 0%; width: 100%; top: 40%; left: 0%"></div>
-<div class="middle-guide horz" style="height: 0%; width: 100%; top: 50%; left: 0%"></div>
-<div class="guide horz" style="height: 0%; width: 100%; top: 60%; left: 0%"></div>
-<div class="guide horz" style="height: 0%; width: 100%; top: 70%; left: 0%"></div>
-<div class="guide horz" style="height: 0%; width: 100%; top: 80%; left: 0%"></div>
-<div class="guide horz" style="height: 0%; width: 100%; top: 90%; left: 0%"></div>
-
-<div class="guide vert" style="height: 100%; width: 0%; top: 0%; left: 10%"></div>
-<div class="guide vert" style="height: 100%; width: 0%; top: 0%; left: 20%"></div>
-<div class="guide vert" style="height: 100%; width: 0%; top: 0%; left: 30%"></div>
-<div class="guide vert" style="height: 100%; width: 0%; top: 0%; left: 40%"></div>
-<div class="middle-guide vert" style="height: 100%; width: 0%; top: 0%; left: 50%"></div>
-<div class="guide vert" style="height: 100%; width: 0%; top: 0%; left: 60%"></div>
-<div class="guide vert" style="height: 100%; width: 0%; top: 0%; left: 70%"></div>
-<div class="guide vert" style="height: 100%; width: 0%; top: 0%; left: 80%"></div>
-<div class="guide vert" style="height: 100%; width: 0%; top: 0%; left: 90%"></div>
-
-
 * Highlighted boxes open a table view of variable contents
 
 <img src="img/rstudio_variables.png" height="500px" />
@@ -175,55 +145,13 @@ Change Current Directory
 ===
 class: center-img
 
-<div class="guide horz" style="height: 0%; width: 100%; top: 10%; left: 0%"></div>
-<div class="guide horz" style="height: 0%; width: 100%; top: 20%; left: 0%"></div>
-<div class="guide horz" style="height: 0%; width: 100%; top: 30%; left: 0%"></div>
-<div class="guide horz" style="height: 0%; width: 100%; top: 40%; left: 0%"></div>
-<div class="middle-guide horz" style="height: 0%; width: 100%; top: 50%; left: 0%"></div>
-<div class="guide horz" style="height: 0%; width: 100%; top: 60%; left: 0%"></div>
-<div class="guide horz" style="height: 0%; width: 100%; top: 70%; left: 0%"></div>
-<div class="guide horz" style="height: 0%; width: 100%; top: 80%; left: 0%"></div>
-<div class="guide horz" style="height: 0%; width: 100%; top: 90%; left: 0%"></div>
-
-<div class="guide vert" style="height: 100%; width: 0%; top: 0%; left: 10%"></div>
-<div class="guide vert" style="height: 100%; width: 0%; top: 0%; left: 20%"></div>
-<div class="guide vert" style="height: 100%; width: 0%; top: 0%; left: 30%"></div>
-<div class="guide vert" style="height: 100%; width: 0%; top: 0%; left: 40%"></div>
-<div class="middle-guide vert" style="height: 100%; width: 0%; top: 0%; left: 50%"></div>
-<div class="guide vert" style="height: 100%; width: 0%; top: 0%; left: 60%"></div>
-<div class="guide vert" style="height: 100%; width: 0%; top: 0%; left: 70%"></div>
-<div class="guide vert" style="height: 100%; width: 0%; top: 0%; left: 80%"></div>
-<div class="guide vert" style="height: 100%; width: 0%; top: 0%; left: 90%"></div>
-
-
 * Highlighted boxes open a table view of variable contents
 
-<img src="img/rstudio_workspace.png" height="600px" />
+<img src="img/rstudio_workspace.png" height="500px" />
 
 Making a New R Script
 ===
 class: center-img
-
-<div class="guide horz" style="height: 0%; width: 100%; top: 10%; left: 0%"></div>
-<div class="guide horz" style="height: 0%; width: 100%; top: 20%; left: 0%"></div>
-<div class="guide horz" style="height: 0%; width: 100%; top: 30%; left: 0%"></div>
-<div class="guide horz" style="height: 0%; width: 100%; top: 40%; left: 0%"></div>
-<div class="middle-guide horz" style="height: 0%; width: 100%; top: 50%; left: 0%"></div>
-<div class="guide horz" style="height: 0%; width: 100%; top: 60%; left: 0%"></div>
-<div class="guide horz" style="height: 0%; width: 100%; top: 70%; left: 0%"></div>
-<div class="guide horz" style="height: 0%; width: 100%; top: 80%; left: 0%"></div>
-<div class="guide horz" style="height: 0%; width: 100%; top: 90%; left: 0%"></div>
-
-<div class="guide vert" style="height: 100%; width: 0%; top: 0%; left: 10%"></div>
-<div class="guide vert" style="height: 100%; width: 0%; top: 0%; left: 20%"></div>
-<div class="guide vert" style="height: 100%; width: 0%; top: 0%; left: 30%"></div>
-<div class="guide vert" style="height: 100%; width: 0%; top: 0%; left: 40%"></div>
-<div class="middle-guide vert" style="height: 100%; width: 0%; top: 0%; left: 50%"></div>
-<div class="guide vert" style="height: 100%; width: 0%; top: 0%; left: 60%"></div>
-<div class="guide vert" style="height: 100%; width: 0%; top: 0%; left: 70%"></div>
-<div class="guide vert" style="height: 100%; width: 0%; top: 0%; left: 80%"></div>
-<div class="guide vert" style="height: 100%; width: 0%; top: 0%; left: 90%"></div>
-
 
 <img src="img/rstudio_script.png" height="600px" />
 
@@ -245,27 +173,6 @@ Running Hello World Script
 ===
 class: center-img
 
-<div class="guide horz" style="height: 0%; width: 100%; top: 10%; left: 0%"></div>
-<div class="guide horz" style="height: 0%; width: 100%; top: 20%; left: 0%"></div>
-<div class="guide horz" style="height: 0%; width: 100%; top: 30%; left: 0%"></div>
-<div class="guide horz" style="height: 0%; width: 100%; top: 40%; left: 0%"></div>
-<div class="middle-guide horz" style="height: 0%; width: 100%; top: 50%; left: 0%"></div>
-<div class="guide horz" style="height: 0%; width: 100%; top: 60%; left: 0%"></div>
-<div class="guide horz" style="height: 0%; width: 100%; top: 70%; left: 0%"></div>
-<div class="guide horz" style="height: 0%; width: 100%; top: 80%; left: 0%"></div>
-<div class="guide horz" style="height: 0%; width: 100%; top: 90%; left: 0%"></div>
-
-<div class="guide vert" style="height: 100%; width: 0%; top: 0%; left: 10%"></div>
-<div class="guide vert" style="height: 100%; width: 0%; top: 0%; left: 20%"></div>
-<div class="guide vert" style="height: 100%; width: 0%; top: 0%; left: 30%"></div>
-<div class="guide vert" style="height: 100%; width: 0%; top: 0%; left: 40%"></div>
-<div class="middle-guide vert" style="height: 100%; width: 0%; top: 0%; left: 50%"></div>
-<div class="guide vert" style="height: 100%; width: 0%; top: 0%; left: 60%"></div>
-<div class="guide vert" style="height: 100%; width: 0%; top: 0%; left: 70%"></div>
-<div class="guide vert" style="height: 100%; width: 0%; top: 0%; left: 80%"></div>
-<div class="guide vert" style="height: 100%; width: 0%; top: 0%; left: 90%"></div>
-
-
 * "Run" button runs current line or selected lines
 * "Source" button runs all lines in file
 
@@ -273,31 +180,73 @@ class: center-img
 
 <div class="box" style="height: 3%; width: 10%; top: 39.2%; left: 49.5%"></div>
 
+Code Completion 
+===
+class: center-img
+
+* Pressing "Enter" will complete the name of the function
+
+<img src="img/rstudio_codeCompletion.png" height="500px" />
+
 Installing Packages
 ===
 class: center-img
 
-<div class="guide horz" style="height: 0%; width: 100%; top: 10%; left: 0%"></div>
-<div class="guide horz" style="height: 0%; width: 100%; top: 20%; left: 0%"></div>
-<div class="guide horz" style="height: 0%; width: 100%; top: 30%; left: 0%"></div>
-<div class="guide horz" style="height: 0%; width: 100%; top: 40%; left: 0%"></div>
-<div class="middle-guide horz" style="height: 0%; width: 100%; top: 50%; left: 0%"></div>
-<div class="guide horz" style="height: 0%; width: 100%; top: 60%; left: 0%"></div>
-<div class="guide horz" style="height: 0%; width: 100%; top: 70%; left: 0%"></div>
-<div class="guide horz" style="height: 0%; width: 100%; top: 80%; left: 0%"></div>
-<div class="guide horz" style="height: 0%; width: 100%; top: 90%; left: 0%"></div>
-
-<div class="guide vert" style="height: 100%; width: 0%; top: 0%; left: 10%"></div>
-<div class="guide vert" style="height: 100%; width: 0%; top: 0%; left: 20%"></div>
-<div class="guide vert" style="height: 100%; width: 0%; top: 0%; left: 30%"></div>
-<div class="guide vert" style="height: 100%; width: 0%; top: 0%; left: 40%"></div>
-<div class="middle-guide vert" style="height: 100%; width: 0%; top: 0%; left: 50%"></div>
-<div class="guide vert" style="height: 100%; width: 0%; top: 0%; left: 60%"></div>
-<div class="guide vert" style="height: 100%; width: 0%; top: 0%; left: 70%"></div>
-<div class="guide vert" style="height: 100%; width: 0%; top: 0%; left: 80%"></div>
-<div class="guide vert" style="height: 100%; width: 0%; top: 0%; left: 90%"></div>
-
-
 * CRAN packages can be installed using RStudio or `install.packages()`
 
 <img src="img/rstudio_installPackages.png" height="500px" />
+
+Creating Reports with R
+===
+class: smaller
+
+* R and RStudio simplifies creating PDF and HTML (webpage) reports that can include:
+ * Code 
+ * R code results 
+ * Formatted text
+ * Tables 
+ * Figures
+* R Markdown files have the extension .Rmd instead of .R 
+* Tutorials (vignettes) are commonly written in this format
+* Markdown cheatsheet: https://www.rstudio.com/resources/cheatsheets/
+
+Example .Rmd
+===
+class: center-img
+
+* Rendering .Rmd to HTML is done with the Knit HTML button in RStudio
+
+<img src="img/rstudio_rmd.png" height="500px" />
+
+<div class="box" style="height: 2.5%; width: 6%; top: 37.5%; left: 23.5%"></div>
+
+Example Rendered .Rmd
+===
+class: center-img
+
+<img src="img/rstudio_rmdHtml.png" height="600px" />
+
+Getting Help
+===
+* Solutions to many R problems have been posted online
+ * Search the web with the error messages 
+* Question/Answer Sites
+ * Stack Overflow: http://stackoverflow.com/
+ * Biostars (Bioinformatics): https://www.biostars.org/
+* Cheatsheets
+ * Summarize available functionality
+ * R: https://cran.r-project.org/doc/contrib/Short-refcard.pdf
+ * RStudio: https://www.rstudio.com/resources/cheatsheets/
+
+===
+
+How Does R Compare to Programming Language "X"? 
+===
+* All programming languages have their advantages and disadvantages
+* R interfaces well with other languages
+ * Many packages call C, C++, Fortran, or Java code for speedups
+ * rPython can be used to access Python
+* R probably has the largest bioinformatics community of any language 
+* Knowing one language simplifies learning others
+* It has one of the best editors (RStudio) developed for the needs of data analysts
+
