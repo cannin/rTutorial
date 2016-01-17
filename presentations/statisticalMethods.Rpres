@@ -558,28 +558,35 @@ plot(pcaResult, type="line", cex.lab=1.5, cex.main=1.5, main="")
 abline(h=1, lty=3, col="red") 
 ```
 
-Nature of PCs Using biplot
+Visualizing PCA Results with Biplots
 ===
 class: smaller-50
 
-* Close together points are similar 
-* Close together vectors are similar
+* Visualizes the magnitude and sign of each feature's contribution to a PC
+* Visualizes each observation in terms of PCs
+* Closeness equals similarity for points and vectors
 
 ```{r, echo=FALSE}
 par(mai=c(0.8,0.5,0.5,0))
 ```
-```{r, fig.align="center", fig.height=4, fig.width=4, dpi=150, out.height="500px"}
+```{r, fig.align="center", fig.height=4, fig.width=4, dpi=150, out.height="475px"}
 
 biplot(pcaResult, scale=0, cex=.7)
 ``` 
 
 Correlations between Vectors
 ===
-class: smaller 
+class: smaller-75
 
+## Feature to Principal Commponent Correlations
 ```{r}
-cor(iris[,"Petal.Length"], iris[,"Petal.Width"])
-cor(iris[,"Petal.Length"], iris[,"Sepal.Width"])
+cor(iris_data, pcaResult$x)
+```
+
+## Feature to Principal Commponent Contributions
+```{r}
+tmp <- abs(pcaResult$rotation)
+sweep(tmp, 2, colSums(tmp), "/")
 ```
 
 How Many Principal Components Should be Kept? 
