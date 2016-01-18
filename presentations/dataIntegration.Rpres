@@ -38,7 +38,7 @@ What is netboxr?
 * `netboxr` is an R implementation of the NetBox algorithm
 * Publication: http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0008918
 
-Load Data and Scripts
+Load Necessary Packages
 ===
 
 ```{r}
@@ -46,12 +46,6 @@ library(rcellminer)
 library(rcellminerData)
 library(paxtoolsr)
 library(netboxr)
-
-# Runs enrichment analysis over many network modules and gene sets
-source("files/getClusterOverrepresentation.R")
-
-# Converts a data.frame to a list
-source("files/convertDFtoList.R")
 ```
 
 Install netboxr

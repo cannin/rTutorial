@@ -14,7 +14,7 @@
 Overview
 ===
 author: Augustin Luna
-date: 17 January, 2016
+date: 18 January, 2016
 width: 960
 height: 700
 transition: linear
@@ -52,3 +52,9 @@ class: smaller-75
 ## Day 4
 * Data Integration Examples
 * Developing Web Applications
+
+Websites
+===
+* About Me: lunean.com
+* Presentations: blog.lunean.com
+

@@ -24,6 +24,12 @@ Topics to be Covered
 * Matrices and Data Frames
 * Writing and Reading Data
 * Plotting
+
+***
+
+* Control Flows
+ * for Loops 
+ * if Statements 
 * Using Packages
  * Installing 
  * Loading
@@ -383,6 +389,67 @@ plot(x=iris$Sepal.Length,
 ```
 
 <img src="usingR-figure/unnamed-chunk-20-1.png" title="plot of chunk unnamed-chunk-20" alt="plot of chunk unnamed-chunk-20" height="600px" style="display: block; margin: auto;" />
+
+for Loops
+===
+
+```r
+hellos <- c("Hello World!", 
+            "Hola Mundo", 
+            "Ola Mundo!")
+
+for(hello in hellos) {
+  cat(hello, "\n")
+}
+```
+
+```
+Hello World! 
+Hola Mundo 
+Ola Mundo! 
+```
+
+if Statements
+===
+class: smaller-65
+
+
+```r
+a <- 5 
+
+# Greater than or equal to
+if(a >= 5) {
+  cat("Greater than or equal to")
+} else {
+  cat("Not greater than or equal to")
+}
+```
+
+```
+Greater than or equal to
+```
+
+```r
+# Equivalent 
+if(a == 5) {
+  cat("Equal")
+}
+```
+
+```
+Equal
+```
+
+```r
+# Not equivalent
+if(a != "Hello World!") {
+  cat("Not equal")
+}
+```
+
+```
+Not equal
+```
 
 R Packages 
 ===
