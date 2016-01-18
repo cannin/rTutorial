@@ -38,6 +38,7 @@ What is Pathway Commons?
  * Biological Pathway Exchange (BioPAX) Format
  * Simple Interaction Format (SIF)
  * Gene sets as Gene Matrix Transposed (GMT) Format
+* Provides infrastructure for searching the aggregated pathway data
 
 Biological Pathway Exchange (BioPAX) Format
 ===

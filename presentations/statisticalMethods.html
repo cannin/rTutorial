@@ -649,6 +649,18 @@ table {
   font-size: 75% !important;
 }
 
+.smaller-70 {
+  font-size: 70% !important;
+}
+
+.smaller-65 {
+  font-size: 65% !important;
+}
+
+.smaller-60 {
+  font-size: 60% !important;
+}
+
 .smaller-50 {
   font-size: 50% !important;
 }
@@ -1303,6 +1315,11 @@ hljs.initHighlightingOnLoad();
 <div class="slideContent" >
 <ul>
 <li>Data analyses are the product of many tasks</li>
+<li>Statistical Methods
+
+<ul>
+<li>Build predictive mathematical models </li>
+</ul></li>
 <li>Data preparation
 
 <ul>
@@ -1314,11 +1331,6 @@ hljs.initHighlightingOnLoad();
 
 <ul>
 <li>Create visualizations to present and communicate findings</li>
-</ul></li>
-<li>Statistics 
-
-<ul>
-<li>Build predictive mathematical models </li>
 </ul></li>
 <li>Methods are common in the areas of informatics, data mining, data science, machine learning, and statistics </li>
 </ul>
@@ -1456,7 +1468,7 @@ names(results)
 </section>
 <section data-transition="linear" data-transition-speed="default">
 <h3>Calculating an ORA (Enrichment) P-Value</h3>
-<div class="slideContent smaller" >
+<div class="slideContent smaller-65" >
 <p>The significance of an over-representation (enrichment analysis) is calculated using a hypergeometric test:</p>
 
 <p>\[ 
@@ -1892,11 +1904,15 @@ and/or the values should be dropped</li>
 </section>
 <section data-transition="linear" data-transition-speed="default">
 <h3>LASSO, Ridge, and Elastic Net Regularized Regression</h3>
-<div class="slideContent smaller" >
+<div class="slideContent smaller-75" >
 <ul>
 <li>Least Absolute Shrinkage and Selection Operator (LASSO): Tends to produce sparse (i.e. few predictors) whereby the algorithm selects an arbritary predictor among a set of correlated ones </li>
 <li>Ridge: Tends to select all correlated predictors with their coefficient values equal to each other</li>
-<li>Elastic Net: Blends the concepts of LASSO and Ridge regression to attempt to create a model that is both sparse, but also includes correlated predictors</li>
+<li>Elastic Net (EN): Blends the concepts of LASSO and Ridge regression to attempt to create a model that is both sparse, but also includes correlated predictors
+
+<ul>
+<li>EN parameter \( \alpha=1 \) represents LASSO regression, while \( \alpha=0 \) approaches Ridge regression </li>
+</ul></li>
 <li>LASSO, Ridge, and Elastic Net regression are available from the <code>glmnet</code> R package
 
 <ul>

@@ -14,7 +14,7 @@
 Introduction to Cellminer
 ===
 author: Augustin Luna
-date: 17 January, 2016
+date: 18 January, 2016
 width: 960
 height: 700
 transition: linear

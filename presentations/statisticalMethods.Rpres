@@ -31,14 +31,14 @@ Topics to be Covered
 Introduction
 ===
 * Data analyses are the product of many tasks
+* Statistical Methods
+ * Build predictive mathematical models 
 * Data preparation
  * Extracting structured data from unstructured data sources 
  * Merging data sources 
  * Ensuring consistency of datasets 
 * Dataset interpretation 
  * Create visualizations to present and communicate findings
-* Statistical Methods
- * Build predictive mathematical models 
 * Methods are common in the areas of informatics, data mining, data science, machine learning, and statistics 
 
 Statistical Methods Flowchart
@@ -127,7 +127,7 @@ plot(df$x, df$y, pch=21, bg=c("black", "red")[unclass(df$class)], xlab="", ylab=
  
 Calculating an ORA (Enrichment) P-Value
 ===
-class: smaller
+class: smaller-65
 
 The significance of an over-representation (enrichment analysis) is calculated using a hypergeometric test:
 
@@ -349,11 +349,12 @@ class: smaller
 
 LASSO, Ridge, and Elastic Net Regularized Regression
 ===
-class: smaller
+class: smaller-75
 
 * Least Absolute Shrinkage and Selection Operator (LASSO): Tends to produce sparse (i.e. few predictors) whereby the algorithm selects an arbritary predictor among a set of correlated ones 
 * Ridge: Tends to select all correlated predictors with their coefficient values equal to each other
-* Elastic Net: Blends the concepts of LASSO and Ridge regression to attempt to create a model that is both sparse, but also includes correlated predictors
+* Elastic Net (EN): Blends the concepts of LASSO and Ridge regression to attempt to create a model that is both sparse, but also includes correlated predictors
+ * EN parameter $\alpha=1$ represents LASSO regression, while $\alpha=0$ approaches Ridge regression 
 * LASSO, Ridge, and Elastic Net regression are available from the `glmnet` R package
  * Sousa FG et al. DNA damage response alterations and its relation with drug activity across the NCI-60. DNA Repair (2015) for example usage of `glmnet` and Elastic Net
 

@@ -17,6 +17,8 @@ docker run --name slides -p 8089:8080 -v /home/ubuntu/random_walks/del:/site -w 
 
 ./decktape/bin/phantomjs ./decktape/decktape.js reveal http://192.168.99.100:8081/presentations/shiny.html ./presentations/shiny.pdf
 
+./decktape/bin/phantomjs ./decktape/decktape.js reveal http://192.168.99.100:8081/presentations/usingR.html ./presentations/usingR.pdf
+
 # Debug Slide
 `r if(file.exists("debug.R")) { source("debug.R"); I(grid) }`
 
