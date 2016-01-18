@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8">
-  <title>Introduction to Cellminer</title>
+  <title>Overview</title>
     
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -1256,7 +1256,7 @@ hljs.initHighlightingOnLoad();
   <div class="slides">
 
 <section data-state="section" data-transition="linear" data-transition-speed="default">
-<h1>Introduction to Cellminer</h1><p>Augustin Luna<br/>17 January, 2016</p>
+<h1>Overview</h1><p>Augustin Luna<br/>17 January, 2016</p>
 
 <div class="slideContent" >
 <!-- NOTE: Styling and external images may be missing --> 
@@ -1275,98 +1275,43 @@ hljs.initHighlightingOnLoad();
 </section>
 <section data-transition="linear" data-transition-speed="default">
 <h3>Topics to be Covered</h3>
-<div class="slideContent" >
+<div class="column column1 slideContent smaller-75" >
+<h2>Day 1</h2>
+
 <ul>
-<li>Introduction to CellMiner</li>
-<li>Introduction to rcellminer</li>
+<li>R: Language Basics, Plotting, Getting Help</li>
+<li>Using the RStudio Editor</li>
 </ul>
 
-</div>
-
-</section>
-<section data-transition="linear" data-transition-speed="default">
-<h3>What is CellMiner?</h3>
-<div class="slideContent smaller-75" >
-<ul>
-<li>Website: 
+<h2>Day 2</h2>
 
 <ul>
-<li><a href="http://discover.nci.nih.gov/cellminer">http://discover.nci.nih.gov/cellminer</a></li>
-</ul></li>
-<li>Retrieval and integration for NCI-60 datasets: molecular and pharmacological</li>
-<li>NCI-60
+<li>Introduction to Statistical Methods
 
 <ul>
-<li>60 human cancer cell lines from 9 tissues of origin: breast, central nervous system, colon, leukemia, melanoma, non-small cell lung, ovarian, prostate, and renal</li>
-<li>Used by the Developmental Therapeutics Program of the National Cancer Institute to screen over 100,000 chemical compounds and natural products</li>
-</ul></li>
-<li>A subset of ~21,000 drugs is provided by CellMiner </li>
-<li>Drug activity levels expressed as 50% growth-inhibitory levels (GI50) were determined at 48 hours using the sulforhodamine B (SRB) assay
-
-<ul>
-<li>Determines cell density based on the measurement of total cellular protein content</li>
+<li>Dimensionality Reduction</li>
+<li>Regression</li>
+<li>Clustering</li>
 </ul></li>
 </ul>
 
+
 </div>
 
-</section>
-<section data-transition="linear" data-transition-speed="default">
-<h3>What is rcellminer?</h3>
-<div class="slideContent smaller" >
-<ul>
-<li>Website and Tutorial (Vignette):
+<div class="column column2 slideContent smaller-75" >
+
+
+<h2>Day 3</h2>
 
 <ul>
-<li><a href="https://www.bioconductor.org/packages/release/bioc/html/rcellminer.html">https://www.bioconductor.org/packages/release/bioc/html/rcellminer.html</a></li>
-</ul></li>
-<li>Provides programmatic access to CellMiner NCI-60 data</li>
-<li>Data Types
-
-<ul>
-<li>Gene and protein expression</li>
-<li>Copy number</li>
-<li>Whole exome mutations</li>
-<li>Activity data for ~21K compounds and information on their structure, mechanism of action, and repeat screens</li>
-</ul></li>
-<li>Easy visualization of compound structures, activity patterns, and molecular feature profiles</li>
-<li>Embedded R Shiny applications allow interactive data exploration</li>
+<li>Accessing Data sets: CellMiner (cell lines/drugs), CBioPortal (patient samples), Pathway Commons (pathways)</li>
 </ul>
 
-</div>
-
-</section>
-<section data-transition="linear" data-transition-speed="default">
-<h3>Embedded Shiny Applications</h3>
-<div class="slideContent" >
-<ul>
-<li>Simplified web applications to do common data exploration tasks
+<h2>Day 4</h2>
 
 <ul>
-<li>Compare any two molecular and drug profiles </li>
-<li>Find related structures </li>
-<li>View information on repeat screening for drug compounds</li>
-</ul></li>
-</ul>
-
-</div>
-
-</section>
-<section data-transition="linear" data-transition-speed="default">
-<h3>Getting Help</h3>
-<div class="slideContent" >
-<ul>
-<li>CellMiner
-
-<ul>
-<li><a href="mailto:webadmin@discover.nci.nih.gov">webadmin@discover.nci.nih.gov</a></li>
-</ul></li>
-<li>rcellminer 
-
-<ul>
-<li>Augustin Luna: aluna [AT] jimmy [DOT] harvard [DOT] edu </li>
-<li>Vinodh Rajapakse: vinodh [DOT] rajapakse [AT] nih [DOT] gov </li>
-</ul></li>
+<li>Data Integration Examples</li>
+<li>Developing Web Applications</li>
 </ul>
 
 </div>

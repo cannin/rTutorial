@@ -1,0 +1,246 @@
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-317478-17', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+Installing R and RStudio
+===
+author: Augustin Luna
+date: 17 January, 2016
+width: 960
+height: 700
+transition: linear
+css: rpres.css
+
+<!-- NOTE: Styling and external images may be missing --> 
+
+<p>Research Fellow
+  <br/>
+  Department of Biostatistics and Computational Biology
+  <br/>
+  Dana-Farber Cancer Institute
+</p>
+<div class="footer" style="display:none;"><img src="img/dfci_logo.gif" height="60px" width="330px" /></div>
+
+Topics to be Covered
+===
+* R: Language Basics, Plotting, Getting Help
+* Using the RStudio Editor
+
+What is R?
+===
+* Free, open source
+* Started in 1993
+* Geared towards scientific computing
+ * Created by Ross Ihaka and Robert Gentleman (statisticians)
+* Interpreted; similar to Python and MATLAB
+
+Why is R Popular? 
+===
+* Free, open source 
+* Interactive data analysis 
+ * Script-driven rather than menu-driven helps reproducibility
+* Flexible and powerful plotting support
+* Excellent package management system 
+
+R Package Management System
+===
+* Large and growing collection of statistical analysis methods
+* Simple package installation; dependency management
+* R scripts usually portable to other platforms 
+* Package repositories ensure functionality, documentation, and interoperability
+* Vignettes (tutorials) provided as runnable analyses 
+* Large diversity of packages for data analysts
+ * This presentation was produced with R packages
+
+Extending R and Package Repositories
+===
+* Comprehensive R Archive Network (CRAN) 
+ * 5,800 R packages (as of June 2014)
+ * Many packages call C, C++, Fortran, or Java code for speedups
+* Bioconductor 
+ * 800+ R packages focused on bioinformatics
+ * 50+ packages dedicated to pathway analysis
+* Devtools 
+ * R package that allows package installation from code repositories
+
+RStudio
+===
+* https://www.rstudio.com/
+* Available for Windows, OSX, and Linux
+* Simplifies common tasks: plotting, package installation, accessing files, 
+viewing variables, etc.
+* Provides code-completion so users do not have to remember whole lists functions and tons parameters
+
+Installing R and RStudio
+===
+* Install R
+ * https://cran.rstudio.com/
+* Install RStudio
+ * https://www.rstudio.com/products/rstudio/download/
+* RStudio does not come with R and R must be installed first
+
+YouTube Video Guides to Install R and RStudio
+===
+* The following videos show how to install R and RStudio from scratch
+ * Include instructions for many common dependencies needed for pathway analysis package `paxtoolsr`
+ * OS X: https://youtu.be/lUwP6KncMOo
+ * Windows: https://youtu.be/LcnCngOlbJc
+ * Linux: https://youtu.be/JlCy9IwZrOk
+
+RStudio Overview
+===
+class: center-img
+
+<img src="img/rstudio.png" height="600px" />
+
+<div class="box" style="height: 10%; width: 20%; top: 30%; left: 20%">
+  <span class="filled" style="font-size: 2rem !important">Editor<span>
+</div>
+
+<div class="box" style="height: 10%; width: 20%; top: 30%; left: 70%">
+  <span class="filled" style="font-size: 2rem !important">Environment<span>
+</div>
+
+<div class="box" style="height: 10%; width: 10%; top: 70%; left: 75%">
+  <span class="filled" style="font-size: 2rem !important">Plot<span>
+</div>
+
+<div class="box" style="height: 10%; width: 20%; top: 70%; left: 20%">
+  <span class="filled" style="font-size: 2rem !important">Console<span>
+</div>
+
+Table View of Variables
+===
+class: center-img
+
+* Highlighted boxes open a table view of variable contents
+
+<img src="img/rstudio_variables.png" height="500px" />
+
+<div class="box" style="height: 7%; width: 2.25%; top: 36%; left: 84.5%"></div>
+
+Change Current Directory
+===
+class: center-img
+
+* Highlighted boxes open a table view of variable contents
+
+<img src="img/rstudio_workspace.png" height="500px" />
+
+Making a New R Script
+===
+class: center-img
+
+<img src="img/rstudio_script.png" height="600px" />
+
+First Script: Hello World!
+===
+
+* `cat()` prints a simple message in the console
+
+
+```r
+cat("Hello World!")
+```
+
+```
+Hello World!
+```
+
+Running Hello World Script
+===
+class: center-img
+
+* "Run" button runs current line or selected lines
+* "Source" button runs all lines in file
+
+<img src="img/rstudio_helloWorld.png" height="500px" />
+
+<div class="box" style="height: 3%; width: 10%; top: 39.2%; left: 49.5%"></div>
+
+Code Completion 
+===
+class: center-img
+
+* Pressing "Enter" will complete the name of the function
+
+<img src="img/rstudio_codeCompletion.png" height="500px" />
+
+Installing Packages
+===
+class: center-img
+
+* CRAN packages can be installed using RStudio or `install.packages()`
+
+<img src="img/rstudio_installPackages.png" height="500px" />
+
+Creating Reports with R
+===
+class: smaller
+
+* R and RStudio simplifies creating PDF and HTML (webpage) reports that can include:
+ * Code 
+ * R code results 
+ * Formatted text
+ * Tables 
+ * Figures
+* R Markdown files have the extension .Rmd instead of .R 
+* Tutorials (vignettes) are commonly written in this format
+* Markdown cheatsheet: https://www.rstudio.com/resources/cheatsheets/
+
+Example RMarkdown (Rmd) Content
+===
+
+* NOTE: Remove apostrophes before each line when trying the Rmd file
+
+
+```r
+' # Heading 
+' ## Sub-heading 
+'
+' Text
+'
+' ```{r}
+' #R code
+' cat("Hello")
+' ```
+```
+
+Converting Rmd to HTML
+===
+class: center-img
+
+* Rendering .Rmd to HTML is done with the Knit HTML button in RStudio
+
+<img src="img/rstudio_rmd.png" height="500px" />
+
+<div class="box" style="height: 2.5%; width: 6%; top: 37.5%; left: 23.5%"></div>
+
+Example Rendered .Rmd
+===
+class: center-img
+
+<img src="img/rstudio_rmdHtml.png" height="600px" />
+
+Getting Help
+===
+* Solutions to many R problems have been posted online
+ * Search the web with the error messages 
+* Question/Answer Sites
+ * Stack Overflow: http://stackoverflow.com/
+ * Biostars (Bioinformatics): https://www.biostars.org/
+* Cheatsheets
+ * Summarize available functionality
+ * R: https://cran.r-project.org/doc/contrib/Short-refcard.pdf
+ * RStudio: https://www.rstudio.com/resources/cheatsheets/
+
+

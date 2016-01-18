@@ -25,4 +25,142 @@ class: smaller
 
 * Connecting CellMiner and TCGA data
 * Connecting CellMiner data to Pathway Commons
-   
+
+NetBox Algorithm Overview
+===
+class: center-img
+
+<img src="img/dataIntegration_netbox.png" height="600px" />
+
+What is netboxr?
+===
+
+* `netboxr` is an R implementation of the NetBox algorithm
+* Publication: http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0008918
+
+Load Data and Scripts
+===
+
+```{r}
+library(rcellminer)
+library(rcellminerData)
+library(paxtoolsr)
+library(netboxr)
+
+# Runs enrichment analysis over many network modules and gene sets
+source("files/getClusterOverrepresentation.R")
+
+# Converts a data.frame to a list
+source("files/convertDFtoList.R")
+```
+
+Install netboxr
+===
+```{r, eval=FALSE}
+# Set default repositories
+setRepositories(ind=1:6)
+options(repos="http://cran.rstudio.com/")
+
+# Install devtools
+install.packages("devtools")
+
+library(devtools)
+
+# Install netboxr
+install_bitbucket(repo="mil2041/netboxr",
+  ref="dec2015", 
+  build_vignette=FALSE,
+  dependencies=TRUE,
+  args="--no-multiarch",	
+  auth_user="devbotcc",
+  password="devbotcc"
+)
+```  
+
+Get Data
+===
+class: smaller-75
+
+```{r}
+mutData <- getAllFeatureData(rcellminerData::molData)[["mut"]]
+
+hiMutGenes <- head(sort(rowSums(mutData), decreasing=TRUE), 25)
+
+# Show first 6 entries 
+head(hiMutGenes)
+```
+
+Run NetBox
+===
+class: smaller-50
+
+```{r, cache=TRUE}
+geneList <- names(hiMutGenes)
+sifNetwork <- downloadPc2("Pathway Commons.7.Reactome.BINARY_SIF.hgnc.sif.gz")
+
+# graphReduced must be an undirected graph
+graphReduced <- networkSimplify(sifNetwork, directed=FALSE)
+results <- geneConnector(geneList=geneList, networkGraph=graphReduced, directed=FALSE, pValueAdj="BH", pValueCutoff=0.05, communityMethod="lec", keepIsolatedNodes=FALSE)
+
+names(results)
+```
+
+Plot netboxr Results
+===
+```{r, echo=FALSE, fig.align="center", fig.height=12, fig.width=12, dpi=150, out.height="600px"}
+plot(results$netboxGraph, layout=layout.fruchterman.reingold)
+```
+
+rcellminer and cgdsr 
+===
+class: smaller-75 
+
+* Example: Mutation BRAF V600E is of interest due to prior analysis. Does it appear in the available datasets? 
+
+Identify Probe ID in CellMiner Exome Data
+===
+class: smaller-75 
+
+```{r}
+library(rcellminer) 
+
+exoProbeIdInfo <- fData(molData[["exo"]])
+idx <- which(exoProbeIdInfo$AA_impact == "V600E")
+exoProbeIdInfo[idx, ]
+```
+
+Get rcellminer Data
+===
+class: smaller-75 
+
+```{r}
+probeId <- rownames(exoProbeIdInfo)[idx]
+
+cellminerDat <- exprs(molData[["exo"]])
+cellminerDat[probeId, ]
+```
+
+Get BRAF-V600E Melanoma Mutation Count from CBioPortal
+===
+class: smaller-75 
+
+```{r, results='hide'}
+library(cgdsr)
+mycgds <- CGDS("http://www.cbioportal.org/")
+
+# Use the functions below to navigate the CBioPortal data
+getCancerStudies(mycgds)
+getGeneticProfiles(mycgds,'skcm_tcga')[,c(1:2)]
+getCaseLists(mycgds,'skcm_tcga')[,c(1:2)]
+```
+
+```{r}
+portalDat <- getProfileData(mycgds, "BRAF", c("skcm_tcga_mutations"), "skcm_tcga_3way_complete")
+length(which(portalDat[, "BRAF"] == "V600E"))
+```
+
+CBioPortal Screenshot
+===
+class: center-img 
+
+<img src="img/cbioportal_v600e.png" height="600px" />

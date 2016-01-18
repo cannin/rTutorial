@@ -1,7 +1,7 @@
 Introduction to CBioPortal
 ===
 author: Augustin Luna
-date: 11 January, 2016
+date: 17 January, 2016
 width: 960
 height: 700
 transition: linear
@@ -72,6 +72,14 @@ CBioPortal Data Notes
 * Example notes
   * Clinical data, includes: overall and disease-free survival, gender, age, stage and tumor grade, when available.
   * mRNA and microRNA data is z-scored (i.e. the number of standard deviations away from the mean of expression
+   
+What is cgdsr? 
+===
+class: smaller 
+
+* Website: 
+ * https://cran.r-project.org/web/packages/cgdsr/index.html
+* Provides programmatic access to CBioPortal data
    
 Getting Help
 ===

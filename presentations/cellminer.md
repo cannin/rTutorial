@@ -14,7 +14,7 @@
 Introduction to Cellminer
 ===
 author: Augustin Luna
-date: 11 January, 2016
+date: 17 January, 2016
 width: 960
 height: 700
 transition: linear
@@ -32,19 +32,29 @@ css: rpres.css
 
 Topics to be Covered
 ===
-* Correlation Test
-* Enrichment Test
-* Multiple Testing Correction
-* Dimensionality Reduction
-* Regression
-* Clustering
+* Introduction to CellMiner
+* Introduction to rcellminer
 
 What is CellMiner?
 ===
-* Concepts covered here are important to the areas of informatics, data mining, data science, machine learning, and statistics 
+class: smaller-75 
 
+* Website: 
+ * http://discover.nci.nih.gov/cellminer
+* Retrieval and integration for NCI-60 datasets: molecular and pharmacological
+* NCI-60
+ * 60 human cancer cell lines from 9 tissues of origin: breast, central nervous system, colon, leukemia, melanoma, non-small cell lung, ovarian, prostate, and renal
+ * Used by the Developmental Therapeutics Program of the National Cancer Institute to screen over 100,000 chemical compounds and natural products
+* A subset of ~21,000 drugs is provided by CellMiner 
+* Drug activity levels expressed as 50% growth-inhibitory levels (GI50) were determined at 48 hours using the sulforhodamine B (SRB) assay
+ * Determines cell density based on the measurement of total cellular protein content
+ 
 What is rcellminer?
 ===
+class: smaller 
+
+* Website and Tutorial (Vignette):
+ * https://www.bioconductor.org/packages/release/bioc/html/rcellminer.html
 * Provides programmatic access to CellMiner NCI-60 data
 * Data Types
  * Gene and protein expression
@@ -57,6 +67,9 @@ What is rcellminer?
 Embedded Shiny Applications
 ===
 * Simplified web applications to do common data exploration tasks
+ * Compare any two molecular and drug profiles 
+ * Find related structures 
+ * View information on repeat screening for drug compounds
 
 Getting Help
 ===
