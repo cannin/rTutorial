@@ -14,7 +14,7 @@
 Introduction to Pathway Commons
 ===
 author: Augustin Luna
-date: 18 January, 2016
+date: 19 January, 2016
 width: 960
 height: 700
 transition: linear
@@ -122,10 +122,12 @@ class: smaller-75
 
 What is paxtoolsr?
 ===
-class: smaller 
+class: smaller-75
 
 * Website and Tutorial (Vignette):    
  * https://bioconductor.org/packages/release/bioc/html/paxtoolsr.html
+* Publication: 
+ * http://www.ncbi.nlm.nih.gov/pubmed/26685306
 * Read and write
  * Biological Pathway Exchange (BioPAX)
  * Binary Simple Interaction Format (SIF) 

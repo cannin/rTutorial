@@ -111,10 +111,12 @@ class: smaller-75
 
 What is paxtoolsr?
 ===
-class: smaller 
+class: smaller-75
 
 * Website and Tutorial (Vignette):    
  * https://bioconductor.org/packages/release/bioc/html/paxtoolsr.html
+* Publication: 
+ * http://www.ncbi.nlm.nih.gov/pubmed/26685306
 * Read and write
  * Biological Pathway Exchange (BioPAX)
  * Binary Simple Interaction Format (SIF) 

@@ -14,7 +14,7 @@
 Introduction to Statistical Methods
 ===
 author: Augustin Luna
-date: 18 January, 2016
+date: 19 January, 2016
 width: 960
 height: 700
 transition: linear
@@ -144,20 +144,20 @@ Enrichment Analysis
 ===
 class: smaller 
 
-* What is the probability of randomly drawing at least 4 black points in a random sample of 5 points? 
+* What is the probability of randomly drawing at least 4 black points in a random sample of 10 points? 
  * The concept of "black" could be replaced by "genes from a given pathway" or "genes with a common function"
 
 <img src="statisticalMethods-figure/unnamed-chunk-3-1.png" title="plot of chunk unnamed-chunk-3" alt="plot of chunk unnamed-chunk-3" height="600px" style="display: block; margin: auto;" />
  
 Calculating an ORA (Enrichment) P-Value
 ===
-class: smaller-65
+class: smaller-60
 
-The significance of an over-representation (enrichment analysis) is calculated using a hypergeometric test:
+The significance (i.e. p-value $P(X \geq k)$) of an over-representation (enrichment analysis) is calculated using a hypergeometric test:
 
 $$
 \begin{align}
-P(pathway_j) = 1 - \sum_{i=0}^{k-1}{\frac{\binom{K}{i}\binom{N-K}{n-i}}{\binom{N}{n}}}
+P(X \geq k) = 1 - \sum_{i=0}^{k-1}{\frac{\binom{K}{i}\binom{N-K}{n-i}}{\binom{N}{n}}}
 \end{align}
 $$
 
@@ -165,9 +165,9 @@ where
 
 * N: number of studied genes, 
 * n: total number of genes identified by a previous analysis
-* K: total number of genes in a pathway $pathway_j$
-* k: number genes previously identified genes in $pathway_j$
-* $\binom{n}{k}$: choose $k$ elements from a set with $n$ elements disregarding order
+* K: total number of genes in with an annotation
+* k: number genes previously identified genes with the annotation
+* $\binom{n}{k}$: the number of of ways of choosing $k$ elements from a set of $n$ elements, disregarding order
 
 The p-value of this test indicates the probability that a random selection of genes of the same size as the input gene set from a population would produce the same number of observed annotations (e.g. for a specific GO term or pathway) or more in the gene set 
  
@@ -213,7 +213,7 @@ phyper or fisher.test Example
 ===
 class: smaller-75
 
-* NOTE: `hitInSample-1` is nescessary in `phyper` beacuse if `lower.tail` is FALSE, probabilities returned are P(X > x). Subtract x by 1 to get P(X ≥ x) (x equal to or greater than).
+* NOTE: `hitInSample-1` is nescessary in `phyper` beacuse if `lower.tail` is FALSE, probabilities returned are P(X > k). Subtract k by 1 to get P(X ≥ k) (k equal to or greater than).
 
 
 ```r
@@ -230,7 +230,7 @@ phyper(hitInSample-1, hitInPop, failInPop, sampleSize, lower.tail= FALSE);
 ```
 
 ```r
-fisher.test(matrix(c(hitInSample, hitInPop-hitInSample, sampleSize-hitInSample, failInPop-sampleSize +hitInSample), 2, 2), alternative='greater')$p.value; 
+fisher.test(matrix(c(hitInSample, hitInPop-hitInSample, sampleSize-hitInSample, failInPop-sampleSize+hitInSample), 2, 2), alternative='greater')$p.value; 
 ```
 
 ```
@@ -245,9 +245,18 @@ Multiple Testing Correction for Enrichment Analyses
 
 Multiple Test Corrections Types
 ===
+class: smaller-75
+
 * Family-Wise Error Rate (FWER): Controls the probability that any test is a false positive
- * Bonferroni Correction: Very stringent correction
- * Adjusted p-value = original p-value * number of tests
+ * Bonferroni Correction: Very stringent correction; the significance cutoff (i.e. $\alpha$) is adjusted by the number of tests conducted
+ 
+ $$
+ \begin{align}
+ \alpha_{new} = \frac{\alpha}{n}
+ \end{align}
+ $$
+ 
+ * $\alpha = 0.05$ and 10 tests is adjusted to $\alpha = 0.005$
 * False Discovery Rate (FDR): Controls the proportion of tests that are false positives 
  * Widely used alternative to FWER (e.g. Bonferroni correction)
  * Example (next slide)
@@ -328,7 +337,7 @@ Regression
 class: smaller-75
 
 * Goal: Find the relationship between an independent variable and a set of dependent variables (also known as predictor or features)
- * Example: The relationship between the expression some genes and drug response
+ * Example: The relationship between drug response (dependent variable) and the expression of some genes (independent variables).
 
 Given $n$ observations each with a response variable $y$ and $p$ predictors (or features)
 
@@ -350,9 +359,10 @@ Example Regression
 ===
 class: smaller-75
 
+
 ```r
-fit <- lm(Petal.Width ~ Petal.Length, data=iris)
-summary(fit)
+results <- lm(Petal.Width ~ Petal.Length, data=iris)
+summary(results)
 ```
 
 ```
@@ -376,17 +386,111 @@ Multiple R-squared:  0.9271,	Adjusted R-squared:  0.9266
 F-statistic:  1882 on 1 and 148 DF,  p-value: < 2.2e-16
 ```
 
+Plotting Regression Results 
+===
+class: smaller-60
+
+
+```r
+par(mai=c(1,1,0,0))
+plot(iris$Petal.Length, iris$Petal.Width, pch=".")
+abline(results, lwd=2)
+
+# Plot distances between points and the regression line (i.e. residuals)
+predictedY <- predict(results)
+segments(iris$Petal.Length, iris$Petal.Width, iris$Petal.Length, predictedY, col="red")
+```
+
+<img src="statisticalMethods-figure/unnamed-chunk-11-1.png" title="plot of chunk unnamed-chunk-11" alt="plot of chunk unnamed-chunk-11" height="500px" style="display: block; margin: auto;" />
+
 Interpreting lm() Results Summary
 ===
 class: smaller
+
 * Residuals: The difference between the actual and predicted values
 * Estimate: Regression coefficient estimates
-* Std. Error: Measurement of the variability of the coefficient estimate. Lower is better. 
+* Std. Error: Measurement of the variability of the coefficient estimate. Lower is better
 * t value: Coefficient score to describe the importance of predictor; used to calculate the p-value
 * Pr(>|t|): Coefficient p-value. Probability the predictor is **NOT** relevant
 * R-square: Score for evaluating how well the model fits the data. Higher is better. This can be adjusted for the number of predictors used in the model. 
  * Values ~0.7 are of more interest, but there is no standard rule
 * More information: http://blog.yhat.com/posts/r-lm-summary.html
+
+Predict Values for New Inputs to Regression Model
+===
+class: smaller-70
+
+
+```r
+new <- data.frame(Petal.Length=seq(-3, 3, 0.5))
+predict(results, new)
+```
+
+```
+         1          2          3          4          5          6 
+-1.6103418 -1.4024641 -1.1945864 -0.9867086 -0.7788309 -0.5709532 
+         7          8          9         10         11         12 
+-0.3630755 -0.1551978  0.0526799  0.2605576  0.4684353  0.6763130 
+        13 
+ 0.8841907 
+```
+
+Multiple Regression
+===
+class: smaller-65
+
+
+```r
+formula <- "Sepal.Width ~ Petal.Length + Petal.Width"
+
+y <- iris$Sepal.Width
+fit <- lm(as.formula(formula), data=iris[,1:4])
+summary(fit) 
+```
+
+```
+
+Call:
+lm(formula = as.formula(formula), data = iris[, 1:4])
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-1.06198 -0.23389  0.01982  0.20580  1.13488 
+
+Coefficients:
+             Estimate Std. Error t value Pr(>|t|)    
+(Intercept)   3.58705    0.09373  38.272  < 2e-16 ***
+Petal.Length -0.25714    0.06691  -3.843  0.00018 ***
+Petal.Width   0.36404    0.15496   2.349  0.02014 *  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.3893 on 147 degrees of freedom
+Multiple R-squared:  0.2131,	Adjusted R-squared:  0.2024 
+F-statistic:  19.9 on 2 and 147 DF,  p-value: 2.238e-08
+```
+
+Plotting Multiple Regression
+===
+class: smaller-50 
+
+
+```r
+pred <- predict(fit)
+
+# Add regression between predicted and observed 
+fit2 <- lm(pred ~ y)
+    
+# Plot predicted versus observed
+title <- paste0("Formula: ", formula, "; R-squared: ", round(summary(fit2)$r.squared, 3))
+
+plot(y, pred, xlim=range(c(y, pred)), ylim=range(c(y, pred)), xlab="observed", ylab="predicted", main=title)
+    
+# Add regression line
+abline(fit2, lwd=2)
+```
+
+<img src="statisticalMethods-figure/unnamed-chunk-14-1.png" title="plot of chunk unnamed-chunk-14" alt="plot of chunk unnamed-chunk-14" height="400px" style="display: block; margin: auto;" />
 
 Some Issues with Regression
 ===
@@ -430,7 +534,7 @@ class: smaller
 
 LASSO, Ridge, and Elastic Net Regularized Regression
 ===
-class: smaller-75
+class: smaller-70
 
 * Least Absolute Shrinkage and Selection Operator (LASSO): Tends to produce sparse (i.e. few predictors) whereby the algorithm selects an arbritary predictor among a set of correlated ones 
 * Ridge: Tends to select all correlated predictors with their coefficient values equal to each other
@@ -467,7 +571,7 @@ dat <- read.table("files/heatmapExample.txt", sep="\t", header=TRUE)
 mat <- as.matrix(dat); heatmap(mat, cexCol=0.75)
 ```
 
-<img src="statisticalMethods-figure/unnamed-chunk-11-1.png" title="plot of chunk unnamed-chunk-11" alt="plot of chunk unnamed-chunk-11" height="500px" style="display: block; margin: auto;" />
+<img src="statisticalMethods-figure/unnamed-chunk-15-1.png" title="plot of chunk unnamed-chunk-15" alt="plot of chunk unnamed-chunk-15" height="500px" style="display: block; margin: auto;" />
 
 Cluster Similarity (Linkage)
 ===
@@ -480,11 +584,17 @@ Cluster Similarity (Linkage)
 
 K-Means Clustering 
 ===
+class: smaller-75
+
 * Algorithm 
  1. A user-selected ($k$) number of means are randomly generated from the data 
  2. $k$ clusters are created by grouping data points to the nearest mean. 
  3. The centroid of the clusters becomes the new mean.
  4. Steps 2 and 3 are repeated until the clusters do not change anymore
+
+<center> 
+  <img src="img/kmeans_allSteps.png" height="250px" /> 
+</center>
 
 K-Means Clustering Example
 ===
@@ -503,7 +613,7 @@ plot(iris[c("Sepal.Length", "Sepal.Width")], bg=c("red","green3","blue")[kc$clus
 points(kc$centers[,c("Sepal.Length", "Sepal.Width")], col=c("red","green3","blue"), pch=8, cex=2)
 ```
 
-<img src="statisticalMethods-figure/unnamed-chunk-12-1.png" title="plot of chunk unnamed-chunk-12" alt="plot of chunk unnamed-chunk-12" height="450px" style="display: block; margin: auto;" />
+<img src="statisticalMethods-figure/unnamed-chunk-16-1.png" title="plot of chunk unnamed-chunk-16" alt="plot of chunk unnamed-chunk-16" height="450px" style="display: block; margin: auto;" />
 
 Determine K-Means Cluster Quality 
 ===
@@ -532,7 +642,7 @@ si <- silhouette(kc$cl, dataDist)
 plot(si, col = c("red", "green3", "blue"))
 ```
 
-<img src="statisticalMethods-figure/unnamed-chunk-14-1.png" title="plot of chunk unnamed-chunk-14" alt="plot of chunk unnamed-chunk-14" height="400px" style="display: block; margin: auto;" />
+<img src="statisticalMethods-figure/unnamed-chunk-18-1.png" title="plot of chunk unnamed-chunk-18" alt="plot of chunk unnamed-chunk-18" height="400px" style="display: block; margin: auto;" />
 
 Selecting k with Average Silhouette
 ===
@@ -559,7 +669,7 @@ plot(1:kMax, avgSi, type="b", pch=19, xlab="Number of Clusters (k)")
 abline(v=which.max(avgSi), lty=2)
 ```
 
-<img src="statisticalMethods-figure/unnamed-chunk-16-1.png" title="plot of chunk unnamed-chunk-16" alt="plot of chunk unnamed-chunk-16" height="400px" style="display: block; margin: auto;" />
+<img src="statisticalMethods-figure/unnamed-chunk-20-1.png" title="plot of chunk unnamed-chunk-20" alt="plot of chunk unnamed-chunk-20" height="400px" style="display: block; margin: auto;" />
 
 Compare Known Classes with Clusters
 ===
@@ -590,8 +700,8 @@ Differences between Hierarchical and K-Means Clustering
 
 Dimensionality Reduction
 ===
-* Goal: Seeks to reveal correlations that exist in data with many predictors
- * This can be used to reduce the dimensionality of the data by decreasing the redundancy of correlated variables 
+* Goal: Seeks to reduce the dimensions of the data without losing (much) information. 
+ * This is possible if many predictors are correlated with one another, and therefore redundant.
 * Principal Component Analysis is a method for dimension reduction 
 
 What is Principal Component Analysis (PCA)
@@ -617,6 +727,7 @@ What are Principal Components?
  * Each PC is a combination of the original variables scaled by a coefficient
  * Every PC explains some variance
  * Each additional PC explains less variance than the previous one 
+* New coordinate axes are constrained to be perpendicular, so the data are de-correlated 
 
 PCA Example 
 ===
@@ -653,7 +764,7 @@ class: smaller-75
 plot(pcaResult$x, pch=21, bg=c("red","green3","blue")[unclass(iris$Species)]) 
 ```
 
-<img src="statisticalMethods-figure/unnamed-chunk-19-1.png" title="plot of chunk unnamed-chunk-19" alt="plot of chunk unnamed-chunk-19" height="400px" style="display: block; margin: auto;" />
+<img src="statisticalMethods-figure/unnamed-chunk-23-1.png" title="plot of chunk unnamed-chunk-23" alt="plot of chunk unnamed-chunk-23" height="400px" style="display: block; margin: auto;" />
 ***
 
 ```r
@@ -662,7 +773,7 @@ plot(pcaResult, type="line", cex.lab=1.5, cex.main=1.5, main="")
 abline(h=1, lty=3, col="red") 
 ```
 
-<img src="statisticalMethods-figure/unnamed-chunk-20-1.png" title="plot of chunk unnamed-chunk-20" alt="plot of chunk unnamed-chunk-20" height="400px" style="display: block; margin: auto;" />
+<img src="statisticalMethods-figure/unnamed-chunk-24-1.png" title="plot of chunk unnamed-chunk-24" alt="plot of chunk unnamed-chunk-24" height="400px" style="display: block; margin: auto;" />
 
 Recovering the Original Data
 ===
@@ -727,7 +838,7 @@ class: smaller-50
 biplot(pcaResult, scale=0, cex=.7)
 ```
 
-<img src="statisticalMethods-figure/unnamed-chunk-23-1.png" title="plot of chunk unnamed-chunk-23" alt="plot of chunk unnamed-chunk-23" height="475px" style="display: block; margin: auto;" />
+<img src="statisticalMethods-figure/unnamed-chunk-27-1.png" title="plot of chunk unnamed-chunk-27" alt="plot of chunk unnamed-chunk-27" height="475px" style="display: block; margin: auto;" />
 
 Correlations between Vectors
 ===
@@ -764,8 +875,11 @@ Petal.Width  0.2918125 0.04808543 0.36445183 0.30622540
 
 How Many Principal Components Should be Kept? 
 ===
+class: smaller
+
 * Kaiser criterion
  * Retain only principal components that with a variance greater than 1
+ * The variance of every input variable is 1 (because the scaling/centering), therefore only retain PCs with "stronger" variances than individual variables.
  * Simple, but less advisable
 * Scree Test
  * Find the place where the smooth decrease in the variances levels off

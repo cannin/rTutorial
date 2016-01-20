@@ -11,10 +11,10 @@
 </script>
 
 
-Introduction to Cellminer
+Introduction to CellMiner
 ===
 author: Augustin Luna
-date: 18 January, 2016
+date: 19 January, 2016
 width: 960
 height: 700
 transition: linear
@@ -55,11 +55,11 @@ class: smaller
 
 * Website and Tutorial (Vignette):
  * https://www.bioconductor.org/packages/release/bioc/html/rcellminer.html
+* Publication: 
+ * http://www.ncbi.nlm.nih.gov/pubmed/26635141
 * Provides programmatic access to CellMiner NCI-60 data
 * Data Types
- * Gene and protein expression
- * Copy number
- * Whole exome mutations
+ * Gene and protein expression, copy number, whole exome mutations, etc
  * Activity data for ~21K compounds and information on their structure, mechanism of action, and repeat screens
 * Easy visualization of compound structures, activity patterns, and molecular feature profiles
 * Embedded R Shiny applications allow interactive data exploration
