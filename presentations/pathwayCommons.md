@@ -14,7 +14,7 @@
 Introduction to Pathway Commons
 ===
 author: Augustin Luna
-date: 19 January, 2016
+date: 21 January, 2016
 width: 960
 height: 700
 transition: linear
@@ -66,6 +66,18 @@ class: smaller-75
 * Advanced tutorial on BioPAX
  * https://github.com/cannin/biopaxTutorial
  
+Pathway Commons Homepage
+===
+class: center-img
+
+<img src="img/pathwayCommons_homepage.png" height="600px" />
+
+Pathway Commons Visualizer
+===
+class: center-img
+
+<img src="img/pcviz_homepage.png" height="600px" /> 
+ 
 Pathway Commons Datasets
 ===
 class: smaller
@@ -107,9 +119,10 @@ SIF Interaction Types
 ===
 class: center-img
 
+* [Complete list of interaction types in Google Docs](https://docs.google.com/document/d/1coFo66uuPQQ4ZMSHr8IzCV7I2DwXCoDBfZw7Vg4MgUE/edit?usp=sharing)
 * Examples of conversions from BioPAX to SIF
 
-<img src="img/pc_sif.png" height="500px" />
+<img src="img/pc_sif.png" height="400px" />
 
 Gene Set (GMT) Format
 ===
@@ -136,6 +149,47 @@ class: smaller-75
  * Systems Biology Graphical Notation Markup Language (SBGN-ML) 
 * Search and summarize local BioPAX files
 * Search Pathway Commons 
+
+Enrichment Analysis with Pathway Commons and CellMiner
+===
+class: smaller-50
+
+* Example on conducting an enrichment analysis on CellMiner cell line data using gene sets from Pathway Commons
+
+
+```r
+# Load libraries
+library(paxtoolsr); library(rcellminer)
+
+# Load data
+geneSets <- downloadPc2("Pathway Commons.7.Reactome.GSEA.hgnc.gmt.gz")
+mutData <- getAllFeatureData(rcellminerData::molData)[["mut"]]
+
+hiMutGenes <- head(sort(rowSums(mutData), decreasing=TRUE), 25)
+
+# Initialize variable
+pvals <- NULL
+
+for(set in geneSets) {
+  #set <- hiMutGenes
+  sampleSize <- length(hiMutGenes) # size drawn
+  hitInSample <- length(which(hiMutGenes %in% set)) # black drawn
+  hitInPop <- length(which(rownames(mutData) %in% set)) # all black 
+  failInPop <- nrow(mutData)-hitInPop # number of red
+  # Calculate over-enrichment for current gene set
+  pval <- phyper(hitInSample-1, hitInPop, failInPop, sampleSize, lower.tail= FALSE)
+  # Add current result
+  pvals <- c(pvals, pval)
+}
+
+# Adjust p-values
+pvals <- p.adjust(pvals, method="fdr")
+length(pvals[pvals < 0.05])
+```
+
+```
+[1] 0
+```
 
 Getting Help
 ===

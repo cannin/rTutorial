@@ -14,7 +14,7 @@
 Introduction to CBioPortal
 ===
 author: Augustin Luna
-date: 19 January, 2016
+date: 20 January, 2016
 width: 960
 height: 700
 transition: linear
@@ -65,12 +65,6 @@ Accessing CBioPortal
  * http://www.cbioportal.org/web_api.jsp
 * `cgdsr` R Package simplifies access to the CBioPortal API 
 
-CBioPortal Website Features
-===
-class: center-img
- 
-<img src="img/cbioportal_website.png" height="500px" />
-
 CBioPortal Data Types
 ===
 * NOTE: Not all samples will have complete data
@@ -89,7 +83,115 @@ CBioPortal Data Notes
 * Example notes
   * Clinical data, includes: overall and disease-free survival, gender, age, stage and tumor grade, when available.
   * mRNA and microRNA data is z-scored (i.e. the number of standard deviations away from the mean of expression
-   
+
+CBioPortal Website Features
+===
+class: center-img
+
+<img src="img/cbioportal_website.png" height="500px" />
+
+CBioPortal Tutorials
+===
+class: center-img
+
+<img src="img/cbioportal_tutorials.png" height="600px" />
+
+CBioPortal Datasets
+===
+class: center-img
+
+<img src="img/cbioportal_datasets.png" height="600px" />
+
+CBioPortal Home Data Selection
+===
+class: center-img
+
+<img src="img/cbioportal_homepage_selection.png" height="600px" />
+
+CBioPortal OncoPrint
+===
+class: center-img
+
+<img src="img/cbioportal_oncoprint.png" height="600px" />
+
+CBioPortal Plots
+===
+class: center-img
+
+<img src="img/cbioportal_plots.png" height="600px" />
+
+CBioPortal Mutations
+===
+class: center-img
+
+<img src="img/cbioportal_mutations.png" height="600px" />
+
+CBioPortal Survival
+===
+class: center-img
+
+<img src="img/cbioportal_kaplan.png" height="600px" />
+
+CBioPortal OncoPrinter
+===
+class: center-img
+
+<img src="img/cbioportal_oncoprinter.png" height="600px" />
+
+CBioPortal Mutation Mapper
+===
+class: center-img
+
+<img src="img/cbioportal_mutationMapper.png" height="600px" />
+
+CBioPortal Study: Summary
+===
+class: center-img
+
+<img src="img/cbioportal_study_summary.png" height="600px" />
+
+CBioPortal Study: Clinical Data
+===
+class: center-img
+
+<img src="img/cbioportal_clinical_data.png" height="600px" />
+
+CBioPortal Patient: Summary
+===
+class: center-img
+
+<img src="img/cbioportal_patient_summary.png" height="600px" />
+
+CBioPortal Patient: Drug Targets
+===
+class: center-img
+
+<img src="img/cbioportal_patient_drug_targets.png" height="600px" />
+
+CBioPortal Patient: Histology
+===
+class: center-img
+
+<img src="img/cbioportal_patient_histology.png" height="600px" />
+
+CBioPortal Patient: Pathology
+===
+class: center-img
+
+<img src="img/cbioportal_patient_pathology.png" height="600px" />
+
+CBioPortal Patient: Copy Number
+===
+class: center-img
+
+<img src="img/cbioportal_patient_copyNumber.png" height="600px" />
+
+CBioPortal Patient: Network
+===
+class: center-img
+
+<img src="img/cbioportal_network.png" height="600px" />
+
 What is cgdsr? 
 ===
 class: smaller 

@@ -1,7 +1,7 @@
 Introduction to R
 ===
 author: Augustin Luna
-date: 18 January, 2016
+date: 20 January, 2016
 width: 960
 height: 700
 transition: linear
@@ -34,6 +34,7 @@ Topics to be Covered
  * Installing 
  * Loading
  * Viewing Help
+* Additional Common Functions 
 
 Basics
 ===
@@ -274,6 +275,8 @@ class: smaller-75
 
 ```r
 data(iris)
+
+# See the first 6 rows of a data.frame
 head(iris)
 ```
 
@@ -285,6 +288,21 @@ head(iris)
 4          4.6         3.1          1.5         0.2  setosa
 5          5.0         3.6          1.4         0.2  setosa
 6          5.4         3.9          1.7         0.4  setosa
+```
+
+```r
+# See the last 6 rows of a data.frame
+tail(iris)
+```
+
+```
+    Sepal.Length Sepal.Width Petal.Length Petal.Width   Species
+145          6.7         3.3          5.7         2.5 virginica
+146          6.7         3.0          5.2         2.3 virginica
+147          6.3         2.5          5.0         1.9 virginica
+148          6.5         3.0          5.2         2.0 virginica
+149          6.2         3.4          5.4         2.3 virginica
+150          5.9         3.0          5.1         1.8 virginica
 ```
 
 Rename data.frame Columns 
@@ -486,6 +504,301 @@ Package Help
 help(package="rcellminer")
 ```
 
+length Function
+===
+
+
+```r
+# Find the length of a vector 
+my_variable <- runif(100)
+length(my_variable)
+```
+
+```
+[1] 100
+```
+
+min, max, summary Functions
+===
+class: smaller 
+
+
+```r
+# Find the minimum
+min(my_variable)
+```
+
+```
+[1] 0.001824665
+```
+
+```r
+# Find the maximum
+max(my_variable)
+```
+
+```
+[1] 0.9447014
+```
+
+```r
+# Output a summary statistics of vector
+summary(my_variable)
+```
+
+```
+    Min.  1st Qu.   Median     Mean  3rd Qu.     Max. 
+0.001825 0.173600 0.451800 0.448800 0.692900 0.944700 
+```
+
+cat, paste Functions
+===
+class: smaller 
+
+
+```r
+hello <- c("hello", "hola", "ola")
+world <- c("world", "mundo")
+
+# Make a new string from multiple variable and separated by "sep"
+helloWorld <- paste(hello[1], world[2], sep=" ")
+cat(helloWorld)
+```
+
+```
+hello mundo
+```
+
+names Function
+===
+
+```r
+indicies <- 1:10
+ 
+randNum <- runif(max(indicies))
+vectorNames <- letters[indicies]
+
+# Name the randNum vector according to vectorNames
+names(randNum) <- vectorNames
+```
+
+list Function 
+===
+class: smaller-70
+
+
+```r
+# Make a list variable; each list element has a different length
+my_list <- list(a=1:5, b=1:10, c=1:100)
+
+names(my_list)
+```
+
+```
+[1] "a" "b" "c"
+```
+
+```r
+my_list$a
+```
+
+```
+[1] 1 2 3 4 5
+```
+
+```r
+my_list[[1]]
+```
+
+```
+[1] 1 2 3 4 5
+```
+
+```r
+my_list[["a"]]
+```
+
+```
+[1] 1 2 3 4 5
+```
+
+```r
+length(my_list)
+```
+
+```
+[1] 3
+```
+
+is.na, which Function and not Operator
+===
+class: smaller-75
+
+
+```r
+my_vector <- c(1, 2, NA, 4, 5, 6, 7, 8, NA, 10)
+
+# Is each element in my_vector an NA
+is.na(my_vector)
+```
+
+```
+ [1] FALSE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE  TRUE FALSE
+```
+
+```r
+# Which indicies in my_vector are NA
+which(is.na(my_vector))
+```
+
+```
+[1] 3 9
+```
+
+```r
+# Which indicies in my_vector are not NA
+which(!is.na(my_vector))
+```
+
+```
+[1]  1  2  4  5  6  7  8 10
+```
+
+is.null Function 
+===
+class: smaller-60
+
+
+```r
+# NULL variables have undefined values
+my_vector <- NULL
+my_vector
+```
+
+```
+NULL
+```
+
+```r
+is.null(my_vector)
+```
+
+```
+[1] TRUE
+```
+
+```r
+my_vector <- c(my_vector, 5)
+my_vector <- c(my_vector, 6)
+my_vector
+```
+
+```
+[1] 5 6
+```
+
+```r
+is.null(my_vector)
+```
+
+```
+[1] FALSE
+```
+
+```r
+is.vector(my_vector)
+```
+
+```
+[1] TRUE
+```
+
+is.nan Function
+===
+
+```r
+my_variable <- NaN
+
+is.nan(my_variable)
+```
+
+```
+[1] TRUE
+```
+
+unique Function
+===
+
+```r
+my_vector <- c(1, 1, 2, 3, 3, 4, 4, 5)
+
+# Find the unique values in a vector
+unique(my_vector)
+```
+
+```
+[1] 1 2 3 4 5
+```
+
+sort Function
+===
+
+```r
+my_vector <- c(1, 4, 3, 6, 7, 10, 9, 5, 2, 8)
+
+# Sort values in vector
+sort(my_vector)
+```
+
+```
+ [1]  1  2  3  4  5  6  7  8  9 10
+```
+
+```r
+sort(my_vector, decreasing=TRUE)
+```
+
+```
+ [1] 10  9  8  7  6  5  4  3  2  1
+```
+
+%in% Function
+===
+class: smaller-70
+
+
+```r
+restaurant_foods <- c("mango", "chicken", "pork", "chips",
+                      "cookies", "cake", "muffins", "cupcakes") 
+
+favorite_foods <- c("mango", "orange", "cake", "chicken")
+
+# Does the restaurant have my favorite foods?
+restaurant_foods %in% favorite_foods
+```
+
+```
+[1]  TRUE  TRUE FALSE FALSE FALSE  TRUE FALSE FALSE
+```
+
+```r
+# What are the indicies of my favorite foods
+which(restaurant_foods %in% favorite_foods)
+```
+
+```
+[1] 1 2 6
+```
+
+```r
+# Return my favorite foods
+restaurant_foods[which(restaurant_foods %in% favorite_foods)]
+```
+
+```
+[1] "mango"   "chicken" "cake"   
+```
+
 Getting Help
 ===
 * Stack Overflow
@@ -495,4 +808,3 @@ Getting Help
  * http://stats.stackexchange.com/
 * Biostars
  * https://www.biostars.org
-

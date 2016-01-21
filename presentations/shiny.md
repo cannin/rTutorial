@@ -14,7 +14,7 @@
 Introduction to Shiny
 ===
 author: Augustin Luna
-date: 17 January, 2016
+date: 21 January, 2016
 width: 960
 height: 700
 transition: linear
@@ -201,6 +201,67 @@ Plot Output Shiny App Example
 class: center-img
 
 <img src="img/shiny_plotOutput.png" height="600px" />
+
+CellMiner Heatmap Shiny App
+===
+class: center-img
+
+<img src="img/shiny_heatmap.png" height="600px" />
+
+Install Heatmap Shiny Component
+===
+
+```r
+if (!require("devtools")) {
+  install.packages("devtools")
+}
+
+devtools::install_github("rstudio/d3heatmap")
+```
+
+CellMiner Heatmap: ui.R
+===
+class: smaller-75
+
+
+```r
+library(shiny)
+library(d3heatmap)
+
+shinyUI(fluidPage(
+  titlePanel("CellMiner Heatmap"),
+  sidebarLayout(
+    sidebarPanel(
+      textInput("geneList", "Gene List:", "TP53 BRAF PTEN")
+    ),
+    mainPanel(
+      d3heatmapOutput("heatmap")
+    )
+  )
+))
+```
+
+CellMiner Heatmap: server.R
+===
+class: smaller-75
+
+
+```r
+# server.R
+library(shiny)
+library(rcellminer)
+library(d3heatmap)
+
+shinyServer(
+  function(input, output){
+    output$heatmap <- renderD3heatmap({
+      genes <- unlist(strsplit(input$geneList, " "))
+      expData <- getAllFeatureData(rcellminerData::molData)[["exp"]]
+      d3heatmap(expData[genes, 1:20], scale="column", colors="YlOrRd")
+    })
+  }
+)
+```
 
 CellMiner Formulas Shiny App
 ===

@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8">
-  <title>Introduction to Cellminer</title>
+  <title>Introduction to CellMiner</title>
     
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -1268,7 +1268,7 @@ hljs.initHighlightingOnLoad();
   <div class="slides">
 
 <section data-state="section" data-transition="linear" data-transition-speed="default">
-<h1>Introduction to Cellminer</h1><p>Augustin Luna<br/>18 January, 2016</p>
+<h1>Introduction to CellMiner</h1><p>Augustin Luna<br/>21 January, 2016</p>
 
 <div class="slideContent" >
 <!-- NOTE: Styling and external images may be missing --> 
@@ -1332,18 +1332,58 @@ hljs.initHighlightingOnLoad();
 <ul>
 <li><a href="https://www.bioconductor.org/packages/release/bioc/html/rcellminer.html">https://www.bioconductor.org/packages/release/bioc/html/rcellminer.html</a></li>
 </ul></li>
+<li>Publication: 
+
+<ul>
+<li><a href="http://www.ncbi.nlm.nih.gov/pubmed/26635141">http://www.ncbi.nlm.nih.gov/pubmed/26635141</a></li>
+</ul></li>
 <li>Provides programmatic access to CellMiner NCI-60 data</li>
 <li>Data Types
 
 <ul>
-<li>Gene and protein expression</li>
-<li>Copy number</li>
-<li>Whole exome mutations</li>
+<li>Gene and protein expression, copy number, whole exome mutations, etc</li>
 <li>Activity data for ~21K compounds and information on their structure, mechanism of action, and repeat screens</li>
 </ul></li>
 <li>Easy visualization of compound structures, activity patterns, and molecular feature profiles</li>
 <li>Embedded R Shiny applications allow interactive data exploration</li>
 </ul>
+
+</div>
+
+</section>
+<section data-transition="linear" data-transition-speed="default">
+<h3>Pattern Comparison using rcellminer</h3>
+<div class="slideContent smaller-50" >
+<pre><code class="r">library(rcellminer)
+
+# Get drug and expression data
+drugAct &lt;- exprs(getAct(rcellminerData::drugData))
+expData &lt;- getAllFeatureData(rcellminerData::molData)[[&quot;exp&quot;]]
+
+# Create pattern of interest
+patternOfInterest &lt;- expData[&quot;SLFN11&quot;, ]
+
+# Run pattern comparison to get correlated drugs and other gene expressions
+r1 &lt;- patternComparison(patternOfInterest, drugAct)
+r2 &lt;- patternComparison(patternOfInterest, expData)
+
+head(r1, 3)
+</code></pre>
+
+<pre><code>             COR         PVAL
+639174 0.8343842 1.227589e-16
+681636 0.7967239 1.243962e-13
+34462  0.7950691 3.302182e-14
+</code></pre>
+
+<pre><code class="r">head(r2, 3)
+</code></pre>
+
+<pre><code>              COR         PVAL
+SLFN11  1.0000000 0.000000e+00
+BCAT1   0.5847423 9.298535e-07
+CCDC181 0.5766713 1.419268e-06
+</code></pre>
 
 </div>
 

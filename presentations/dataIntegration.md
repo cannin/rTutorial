@@ -14,7 +14,7 @@
 Data Integration with cgdsr, rcellminer, and paxtoolsr
 ===
 author: Augustin Luna
-date: 18 January, 2016
+date: 20 January, 2016
 width: 960
 height: 700
 transition: linear

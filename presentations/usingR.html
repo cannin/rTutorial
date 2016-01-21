@@ -1268,7 +1268,7 @@ hljs.initHighlightingOnLoad();
   <div class="slides">
 
 <section data-state="section" data-transition="linear" data-transition-speed="default">
-<h1>Introduction to R</h1><p>Augustin Luna<br/>18 January, 2016</p>
+<h1>Introduction to R</h1><p>Augustin Luna<br/>20 January, 2016</p>
 
 <div class="slideContent" >
 <!-- NOTE: Styling and external images may be missing --> 
@@ -1316,6 +1316,7 @@ hljs.initHighlightingOnLoad();
 <li>Loading</li>
 <li>Viewing Help</li>
 </ul></li>
+<li>Additional Common Functions </li>
 </ul>
 
 </div>
@@ -1553,6 +1554,8 @@ scores[i,]
 <h3>Data Frames </h3>
 <div class="slideContent smaller-75" >
 <pre><code class="r">data(iris)
+
+# See the first 6 rows of a data.frame
 head(iris)
 </code></pre>
 
@@ -1563,6 +1566,19 @@ head(iris)
 4          4.6         3.1          1.5         0.2  setosa
 5          5.0         3.6          1.4         0.2  setosa
 6          5.4         3.9          1.7         0.4  setosa
+</code></pre>
+
+<pre><code class="r"># See the last 6 rows of a data.frame
+tail(iris)
+</code></pre>
+
+<pre><code>    Sepal.Length Sepal.Width Petal.Length Petal.Width   Species
+145          6.7         3.3          5.7         2.5 virginica
+146          6.7         3.0          5.2         2.3 virginica
+147          6.3         2.5          5.0         1.9 virginica
+148          6.5         3.0          5.2         2.0 virginica
+149          6.2         3.4          5.4         2.3 virginica
+150          5.9         3.0          5.1         1.8 virginica
 </code></pre>
 
 </div>
@@ -1777,6 +1793,270 @@ sessionInfo()
 <h3>Package Help</h3>
 <div class="slideContent" >
 <pre><code class="r">help(package=&quot;rcellminer&quot;)
+</code></pre>
+
+</div>
+
+</section>
+<section data-transition="linear" data-transition-speed="default">
+<h3>length Function</h3>
+<div class="slideContent" >
+<pre><code class="r"># Find the length of a vector 
+my_variable &lt;- runif(100)
+length(my_variable)
+</code></pre>
+
+<pre><code>[1] 100
+</code></pre>
+
+</div>
+
+</section>
+<section data-transition="linear" data-transition-speed="default">
+<h3>min, max, summary Functions</h3>
+<div class="slideContent smaller" >
+<pre><code class="r"># Find the minimum
+min(my_variable)
+</code></pre>
+
+<pre><code>[1] 0.001824665
+</code></pre>
+
+<pre><code class="r"># Find the maximum
+max(my_variable)
+</code></pre>
+
+<pre><code>[1] 0.9447014
+</code></pre>
+
+<pre><code class="r"># Output a summary statistics of vector
+summary(my_variable)
+</code></pre>
+
+<pre><code>    Min.  1st Qu.   Median     Mean  3rd Qu.     Max. 
+0.001825 0.173600 0.451800 0.448800 0.692900 0.944700 
+</code></pre>
+
+</div>
+
+</section>
+<section data-transition="linear" data-transition-speed="default">
+<h3>cat, paste Functions</h3>
+<div class="slideContent smaller" >
+<pre><code class="r">hello &lt;- c(&quot;hello&quot;, &quot;hola&quot;, &quot;ola&quot;)
+world &lt;- c(&quot;world&quot;, &quot;mundo&quot;)
+
+# Make a new string from multiple variable and separated by &quot;sep&quot;
+helloWorld &lt;- paste(hello[1], world[2], sep=&quot; &quot;)
+cat(helloWorld)
+</code></pre>
+
+<pre><code>hello mundo
+</code></pre>
+
+</div>
+
+</section>
+<section data-transition="linear" data-transition-speed="default">
+<h3>names Function</h3>
+<div class="slideContent" >
+<pre><code class="r">indicies &lt;- 1:10
+
+randNum &lt;- runif(max(indicies))
+vectorNames &lt;- letters[indicies]
+
+# Name the randNum vector according to vectorNames
+names(randNum) &lt;- vectorNames
+</code></pre>
+
+</div>
+
+</section>
+<section data-transition="linear" data-transition-speed="default">
+<h3>list Function </h3>
+<div class="slideContent smaller-70" >
+<pre><code class="r"># Make a list variable; each list element has a different length
+my_list &lt;- list(a=1:5, b=1:10, c=1:100)
+
+names(my_list)
+</code></pre>
+
+<pre><code>[1] &quot;a&quot; &quot;b&quot; &quot;c&quot;
+</code></pre>
+
+<pre><code class="r">my_list$a
+</code></pre>
+
+<pre><code>[1] 1 2 3 4 5
+</code></pre>
+
+<pre><code class="r">my_list[[1]]
+</code></pre>
+
+<pre><code>[1] 1 2 3 4 5
+</code></pre>
+
+<pre><code class="r">my_list[[&quot;a&quot;]]
+</code></pre>
+
+<pre><code>[1] 1 2 3 4 5
+</code></pre>
+
+<pre><code class="r">length(my_list)
+</code></pre>
+
+<pre><code>[1] 3
+</code></pre>
+
+</div>
+
+</section>
+<section data-transition="linear" data-transition-speed="default">
+<h3>is.na, which Function and not Operator</h3>
+<div class="slideContent smaller-75" >
+<pre><code class="r">my_vector &lt;- c(1, 2, NA, 4, 5, 6, 7, 8, NA, 10)
+
+# Is each element in my_vector an NA
+is.na(my_vector)
+</code></pre>
+
+<pre><code> [1] FALSE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE  TRUE FALSE
+</code></pre>
+
+<pre><code class="r"># Which indicies in my_vector are NA
+which(is.na(my_vector))
+</code></pre>
+
+<pre><code>[1] 3 9
+</code></pre>
+
+<pre><code class="r"># Which indicies in my_vector are not NA
+which(!is.na(my_vector))
+</code></pre>
+
+<pre><code>[1]  1  2  4  5  6  7  8 10
+</code></pre>
+
+</div>
+
+</section>
+<section data-transition="linear" data-transition-speed="default">
+<h3>is.null Function </h3>
+<div class="slideContent smaller-60" >
+<pre><code class="r"># NULL variables have undefined values
+my_vector &lt;- NULL
+my_vector
+</code></pre>
+
+<pre><code>NULL
+</code></pre>
+
+<pre><code class="r">is.null(my_vector)
+</code></pre>
+
+<pre><code>[1] TRUE
+</code></pre>
+
+<pre><code class="r">my_vector &lt;- c(my_vector, 5)
+my_vector &lt;- c(my_vector, 6)
+my_vector
+</code></pre>
+
+<pre><code>[1] 5 6
+</code></pre>
+
+<pre><code class="r">is.null(my_vector)
+</code></pre>
+
+<pre><code>[1] FALSE
+</code></pre>
+
+<pre><code class="r">is.vector(my_vector)
+</code></pre>
+
+<pre><code>[1] TRUE
+</code></pre>
+
+</div>
+
+</section>
+<section data-transition="linear" data-transition-speed="default">
+<h3>is.nan Function</h3>
+<div class="slideContent" >
+<pre><code class="r">my_variable &lt;- NaN
+
+is.nan(my_variable)
+</code></pre>
+
+<pre><code>[1] TRUE
+</code></pre>
+
+</div>
+
+</section>
+<section data-transition="linear" data-transition-speed="default">
+<h3>unique Function</h3>
+<div class="slideContent" >
+<pre><code class="r">my_vector &lt;- c(1, 1, 2, 3, 3, 4, 4, 5)
+
+# Find the unique values in a vector
+unique(my_vector)
+</code></pre>
+
+<pre><code>[1] 1 2 3 4 5
+</code></pre>
+
+</div>
+
+</section>
+<section data-transition="linear" data-transition-speed="default">
+<h3>sort Function</h3>
+<div class="slideContent" >
+<pre><code class="r">my_vector &lt;- c(1, 4, 3, 6, 7, 10, 9, 5, 2, 8)
+
+# Sort values in vector
+sort(my_vector)
+</code></pre>
+
+<pre><code> [1]  1  2  3  4  5  6  7  8  9 10
+</code></pre>
+
+<pre><code class="r">sort(my_vector, decreasing=TRUE)
+</code></pre>
+
+<pre><code> [1] 10  9  8  7  6  5  4  3  2  1
+</code></pre>
+
+</div>
+
+</section>
+<section data-transition="linear" data-transition-speed="default">
+<h3>%in% Function</h3>
+<div class="slideContent smaller-70" >
+<pre><code class="r">restaurant_foods &lt;- c(&quot;mango&quot;, &quot;chicken&quot;, &quot;pork&quot;, &quot;chips&quot;,
+                      &quot;cookies&quot;, &quot;cake&quot;, &quot;muffins&quot;, &quot;cupcakes&quot;) 
+
+favorite_foods &lt;- c(&quot;mango&quot;, &quot;orange&quot;, &quot;cake&quot;, &quot;chicken&quot;)
+
+# Does the restaurant have my favorite foods?
+restaurant_foods %in% favorite_foods
+</code></pre>
+
+<pre><code>[1]  TRUE  TRUE FALSE FALSE FALSE  TRUE FALSE FALSE
+</code></pre>
+
+<pre><code class="r"># What are the indicies of my favorite foods
+which(restaurant_foods %in% favorite_foods)
+</code></pre>
+
+<pre><code>[1] 1 2 6
+</code></pre>
+
+<pre><code class="r"># Return my favorite foods
+restaurant_foods[which(restaurant_foods %in% favorite_foods)]
+</code></pre>
+
+<pre><code>[1] &quot;mango&quot;   &quot;chicken&quot; &quot;cake&quot;   
 </code></pre>
 
 </div>

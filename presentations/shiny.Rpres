@@ -188,6 +188,64 @@ class: center-img
 
 <img src="img/shiny_plotOutput.png" height="600px" />
 
+CellMiner Heatmap Shiny App
+===
+class: center-img
+
+<img src="img/shiny_heatmap.png" height="600px" />
+
+Install Heatmap Shiny Component
+===
+```{r, eval=FALSE}
+if (!require("devtools")) {
+  install.packages("devtools")
+}
+
+devtools::install_github("rstudio/d3heatmap")
+```
+
+CellMiner Heatmap: ui.R
+===
+class: smaller-75
+
+```{r, eval=FALSE}
+library(shiny)
+library(d3heatmap)
+
+shinyUI(fluidPage(
+  titlePanel("CellMiner Heatmap"),
+  sidebarLayout(
+    sidebarPanel(
+      textInput("geneList", "Gene List:", "TP53 BRAF PTEN")
+    ),
+    mainPanel(
+      d3heatmapOutput("heatmap")
+    )
+  )
+))
+```
+
+CellMiner Heatmap: server.R
+===
+class: smaller-75
+
+```{r, eval=FALSE}
+# server.R
+library(shiny)
+library(rcellminer)
+library(d3heatmap)
+
+shinyServer(
+  function(input, output){
+    output$heatmap <- renderD3heatmap({
+      genes <- unlist(strsplit(input$geneList, " "))
+      expData <- getAllFeatureData(rcellminerData::molData)[["exp"]]
+      d3heatmap(expData[genes, 1:20], scale="column", colors="YlOrRd")
+    })
+  }
+)
+```
+
 CellMiner Formulas Shiny App
 ===
 * Drug activity can result from the interaction of many genes 

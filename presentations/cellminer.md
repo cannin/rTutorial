@@ -14,7 +14,7 @@
 Introduction to CellMiner
 ===
 author: Augustin Luna
-date: 19 January, 2016
+date: 21 January, 2016
 width: 960
 height: 700
 transition: linear
@@ -63,6 +63,46 @@ class: smaller
  * Activity data for ~21K compounds and information on their structure, mechanism of action, and repeat screens
 * Easy visualization of compound structures, activity patterns, and molecular feature profiles
 * Embedded R Shiny applications allow interactive data exploration
+
+Pattern Comparison using rcellminer
+===
+class: smaller-50
+
+
+```r
+library(rcellminer)
+
+# Get drug and expression data
+drugAct <- exprs(getAct(rcellminerData::drugData))
+expData <- getAllFeatureData(rcellminerData::molData)[["exp"]]
+
+# Create pattern of interest
+patternOfInterest <- expData["SLFN11", ]
+
+# Run pattern comparison to get correlated drugs and other gene expressions
+r1 <- patternComparison(patternOfInterest, drugAct)
+r2 <- patternComparison(patternOfInterest, expData)
+
+head(r1, 3)
+```
+
+```
+             COR         PVAL
+639174 0.8343842 1.227589e-16
+681636 0.7967239 1.243962e-13
+34462  0.7950691 3.302182e-14
+```
+
+```r
+head(r2, 3)
+```
+
+```
+              COR         PVAL
+SLFN11  1.0000000 0.000000e+00
+BCAT1   0.5847423 9.298535e-07
+CCDC181 0.5766713 1.419268e-06
+```
 
 Embedded Shiny Applications
 ===

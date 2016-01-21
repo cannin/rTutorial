@@ -53,6 +53,28 @@ class: smaller
 * Easy visualization of compound structures, activity patterns, and molecular feature profiles
 * Embedded R Shiny applications allow interactive data exploration
 
+Pattern Comparison using rcellminer
+===
+class: smaller-50
+
+```{r}
+library(rcellminer)
+
+# Get drug and expression data
+drugAct <- exprs(getAct(rcellminerData::drugData))
+expData <- getAllFeatureData(rcellminerData::molData)[["exp"]]
+
+# Create pattern of interest
+patternOfInterest <- expData["SLFN11", ]
+
+# Run pattern comparison to get correlated drugs and other gene expressions
+r1 <- patternComparison(patternOfInterest, drugAct)
+r2 <- patternComparison(patternOfInterest, expData)
+
+head(r1, 3)
+head(r2, 3)
+```
+
 Embedded Shiny Applications
 ===
 * Simplified web applications to do common data exploration tasks

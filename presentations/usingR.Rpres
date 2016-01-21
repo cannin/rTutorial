@@ -34,6 +34,7 @@ Topics to be Covered
  * Installing 
  * Loading
  * Viewing Help
+* Additional Common Functions 
 
 Basics
 ===
@@ -171,7 +172,12 @@ class: smaller-75
 
 ```{r}
 data(iris)
+
+# See the first 6 rows of a data.frame
 head(iris)
+
+# See the last 6 rows of a data.frame
+tail(iris)
 ```
 
 Rename data.frame Columns 
@@ -304,6 +310,153 @@ Package Help
 help(package="rcellminer")
 ```
 
+length Function
+===
+
+```{r}
+# Find the length of a vector 
+my_variable <- runif(100)
+length(my_variable)
+```
+
+min, max, summary Functions
+===
+class: smaller 
+
+```{r}
+# Find the minimum
+min(my_variable)
+
+# Find the maximum
+max(my_variable)
+
+# Output a summary statistics of vector
+summary(my_variable)
+```
+
+cat, paste Functions
+===
+class: smaller 
+
+```{r}
+hello <- c("hello", "hola", "ola")
+world <- c("world", "mundo")
+
+# Make a new string from multiple variable and separated by "sep"
+helloWorld <- paste(hello[1], world[2], sep=" ")
+cat(helloWorld)
+```
+
+names Function
+===
+```{r}
+indicies <- 1:10
+ 
+randNum <- runif(max(indicies))
+vectorNames <- letters[indicies]
+
+# Name the randNum vector according to vectorNames
+names(randNum) <- vectorNames
+```
+
+list Function 
+===
+class: smaller-70
+
+```{r}
+# Make a list variable; each list element has a different length
+my_list <- list(a=1:5, b=1:10, c=1:100)
+
+names(my_list)
+my_list$a
+
+my_list[[1]]
+my_list[["a"]]
+
+length(my_list)
+```
+
+is.na, which Function and not Operator
+===
+class: smaller-75
+
+```{r}
+my_vector <- c(1, 2, NA, 4, 5, 6, 7, 8, NA, 10)
+
+# Is each element in my_vector an NA
+is.na(my_vector)
+
+# Which indicies in my_vector are NA
+which(is.na(my_vector))
+
+# Which indicies in my_vector are not NA
+which(!is.na(my_vector))
+```
+
+is.null Function 
+===
+class: smaller-60
+
+```{r}
+# NULL variables have undefined values
+my_vector <- NULL
+my_vector
+is.null(my_vector)
+
+my_vector <- c(my_vector, 5)
+my_vector <- c(my_vector, 6)
+my_vector
+is.null(my_vector)
+is.vector(my_vector)
+```
+
+is.nan Function
+===
+```{r}
+my_variable <- NaN
+
+is.nan(my_variable)
+```
+
+unique Function
+===
+```{r}
+my_vector <- c(1, 1, 2, 3, 3, 4, 4, 5)
+
+# Find the unique values in a vector
+unique(my_vector)
+```
+
+sort Function
+===
+```{r}
+my_vector <- c(1, 4, 3, 6, 7, 10, 9, 5, 2, 8)
+
+# Sort values in vector
+sort(my_vector)
+sort(my_vector, decreasing=TRUE)
+```
+
+%in% Function
+===
+class: smaller-70
+
+```{r}
+restaurant_foods <- c("mango", "chicken", "pork", "chips",
+                      "cookies", "cake", "muffins", "cupcakes") 
+
+favorite_foods <- c("mango", "orange", "cake", "chicken")
+
+# Does the restaurant have my favorite foods?
+restaurant_foods %in% favorite_foods
+
+# What are the indicies of my favorite foods
+which(restaurant_foods %in% favorite_foods)
+
+# Return my favorite foods
+restaurant_foods[which(restaurant_foods %in% favorite_foods)]
+```
+
 Getting Help
 ===
 * Stack Overflow
@@ -313,4 +466,3 @@ Getting Help
  * http://stats.stackexchange.com/
 * Biostars
  * https://www.biostars.org
-
