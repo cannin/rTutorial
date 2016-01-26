@@ -9,4 +9,14 @@ head <- "
   ga('send', 'pageview');
 
 </script>
+
+<script src='https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js'></script>
+<script>
+$(window).bind('load', function() {
+  Reveal.addEventListener('slidechanged', function(event) {
+    console.log('Slide Index: ' + event.indexh);
+    ga('send', 'event', 'Slide Index', 'click', event.indexh);
+  });
+});
+</script>
 "

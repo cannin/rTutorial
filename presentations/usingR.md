@@ -1,14 +1,13 @@
 Introduction to R
 ===
 author: Augustin Luna
-date: 20 January, 2016
+date: 26 January, 2016
 width: 960
 height: 700
 transition: linear
 css: rpres.css
 
 <!-- NOTE: Styling and external images may be missing --> 
-
 <p>Research Fellow
   <br/>
   Department of Biostatistics and Computational Biology
@@ -529,7 +528,7 @@ min(my_variable)
 ```
 
 ```
-[1] 0.001824665
+[1] 0.001632931
 ```
 
 ```r
@@ -538,7 +537,7 @@ max(my_variable)
 ```
 
 ```
-[1] 0.9447014
+[1] 0.9998614
 ```
 
 ```r
@@ -548,7 +547,7 @@ summary(my_variable)
 
 ```
     Min.  1st Qu.   Median     Mean  3rd Qu.     Max. 
-0.001825 0.173600 0.451800 0.448800 0.692900 0.944700 
+0.001633 0.269400 0.451900 0.484700 0.723300 0.999900 
 ```
 
 cat, paste Functions

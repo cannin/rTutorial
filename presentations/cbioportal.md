@@ -10,18 +10,27 @@
 
 </script>
 
+<script src='https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js'></script>
+<script>
+$(window).bind('load', function() {
+  Reveal.addEventListener('slidechanged', function(event) {
+    console.log('Slide Index: ' + event.indexh);
+    ga('send', 'event', 'Slide Index', 'click', event.indexh);
+  });
+});
+</script>
+
 
 Introduction to CBioPortal
 ===
 author: Augustin Luna
-date: 20 January, 2016
+date: 26 January, 2016
 width: 960
 height: 700
 transition: linear
 css: rpres.css
 
 <!-- NOTE: Styling and external images may be missing --> 
-
 <p>Research Fellow
   <br/>
   Department of Biostatistics and Computational Biology
