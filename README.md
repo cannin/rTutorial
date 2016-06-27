@@ -2,7 +2,7 @@
 docker run --name slides -p 8081:8080 -v rTutorial:/site -w /site -t cannin/nodejs-http-server
 
 ## Remote Docker
-docker run --name slides -p 8089:8080 -v del:/site -w /site -t cannin/nodejs-http-server
+docker run --name slides -p 8089:8080 -v ~/slides:/site -w /site -t cannin/nodejs-http-server
 
 ## Generate PDF Using decktape
 [Download Decktape](https://github.com/astefanutti/decktape)
